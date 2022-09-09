@@ -1,0 +1,20 @@
+{
+  "name": "potluck",
+  "version": "1.0.0",
+  "description": "This app is made to plan and organize potluck dinners.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimenezfede/potluck.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jimenezfede/potluck/issues"
+  },
+  "homepage": "https://github.com/jimenezfede/potluck#readme"
+}
