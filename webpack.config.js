@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -32,4 +33,9 @@ module.exports = {
     publicPath: 'http://localhost:3000/dist/',
     hotOnly: true,
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      process: { env: {} },
+    }),
+  ],
 };
