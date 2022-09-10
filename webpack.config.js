@@ -1,10 +1,8 @@
 const path = require('path');
 
-const webpack = require('webpack');
-
 module.exports = {
   devtool: 'inline-source-map',
-  entry: './client/src/index.js',
+  entry: './client/index.js',
   output: {
     path: path.resolve(__dirname, 'client/src/public/dist/'),
     filename: 'bundle.js',
