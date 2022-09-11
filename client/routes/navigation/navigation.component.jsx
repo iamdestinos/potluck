@@ -1,5 +1,7 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import LoginButton from '../../components/login-button/login-button.component';
+import LogoutButton from '../../components/logout-button/logout-button.component';
 
 const Navigation = () => (
   <>
@@ -10,9 +12,11 @@ const Navigation = () => (
         </Link>
         <ul className="navbar-nav navbar-right mb-lg-0">
           <li className="nav-item">
-            <Link className="nav-link" to="/auth">
-              Log In
-            </Link>
+            <LoginButton />
+          </li>
+          <li className="nav-item">
+            <LogoutButton />
+
           </li>
         </ul>
       </div>

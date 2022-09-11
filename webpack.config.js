@@ -1,5 +1,7 @@
 const path = require('path');
 
+const Dotenv = require('dotenv-webpack');
+
 module.exports = {
   devtool: 'inline-source-map',
   entry: './client/index.js',
@@ -32,4 +34,9 @@ module.exports = {
     publicPath: 'http://localhost:3000/dist/',
     hotOnly: true,
   },
+  plugins: [
+    new Dotenv({
+      systemvars: true,
+    }),
+  ],
 };
