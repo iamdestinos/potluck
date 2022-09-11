@@ -1,5 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
+
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -34,8 +35,8 @@ module.exports = {
     hotOnly: true,
   },
   plugins: [
-    new webpack.DefinePlugin({
-      process: { env: {} },
+    new Dotenv({
+      systemvars: true,
     }),
   ],
 };
