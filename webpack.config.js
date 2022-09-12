@@ -1,10 +1,9 @@
 const path = require('path');
-
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   devtool: 'inline-source-map',
-  entry: './client/index.js',
+  entry: './client/src/index.js',
   output: {
     path: path.resolve(__dirname, 'client/src/public/dist/'),
     filename: 'bundle.js',
