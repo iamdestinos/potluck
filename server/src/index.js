@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const db = require('./db');
+require('./db');
 
 /**
  * This is the file where we set up the server connection
