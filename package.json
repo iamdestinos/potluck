@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server/src/index.js",
     "build": "webpack",
-    "dev": "npm start & npm run build"
+    "dev:build": "webpack --watch",
+    "dev": "npm start & npm run dev:build"
   },
   "repository": {
     "type": "git",

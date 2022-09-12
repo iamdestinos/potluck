@@ -26,7 +26,6 @@ module.exports = {
   },
   resolve: { extensions: ['*', '.js', '.jsx'] },
   mode: 'development',
-  watch: true,
   devServer: {
     contentBase: path.join(__dirname, 'client/src/public/'),
     port: 3000,
