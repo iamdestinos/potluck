@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import sub-components
+
 import Dishes from './dishes.component.jsx';
 
 function FoodForm(props) {

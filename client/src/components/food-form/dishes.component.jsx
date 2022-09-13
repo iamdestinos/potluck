@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import subclasses
+
 import Dish from './dish.component.jsx';
 
 function Dishes (props) {
