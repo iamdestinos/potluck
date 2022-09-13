@@ -1,6 +1,3 @@
 node_modules
 client/src/public/dist
 .env
-
-cert.pem
-key.pem
