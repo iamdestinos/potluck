@@ -5,12 +5,11 @@ const Profile = () => (
   <>
     <ProfileCard />
     {/* <h2>Profile Name</h2> */}
-    <h4>🍲🍲🍲🍲🍲🍲</h4>
+    {/* <ul>Event Entry</ul>
     <ul>Event Entry</ul>
     <ul>Event Entry</ul>
     <ul>Event Entry</ul>
-    <ul>Event Entry</ul>
-    <ul>Event Entry</ul>
+    <ul>Event Entry</ul> */}
   </>
 
 );
