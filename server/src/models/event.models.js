@@ -11,6 +11,7 @@ const eventSchema = new Schema({
   foods: [{
     type: Schema.Types.ObjectId,
     name: String,
+    course: String,
     ref: 'User',
   }],
   attending: [{
