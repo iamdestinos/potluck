@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   app: 
-    container_name: potluck
+    container_name: potluck-app
     restart: always
     build: .
     ports:
@@ -12,9 +12,25 @@ services:
       - mongo
       
   mongo:
-    container_name: mongo
+    container_name: mongo-db
     image: mongo
     restart: always
     ports:
       - 27017:27017
+
+  caddy:
+    container_name: caddy-service
+    image: caddy/caddy:2.2.1-alpine
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/site:/srv
+      - caddy_data:/data
+      - caddy_config:/config 
+volumes:
+  caddy_data:
+  caddy_config:
 
