@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
+const clc = require('cli-color');
+require('dotenv').config();
 require('./db');
 const { User, Event } = require('./models/index');
 
-const port = 3000;
+const { PORT } = process.env;
 
 const app = express();
 const staticPath = path.resolve(__dirname, '../../client/src/public');
@@ -22,4 +24,4 @@ app.post('/event', (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
-app.listen(port, () => console.log(`Potluck is running on port ${port}`));
+app.listen(PORT, () => console.log(clc.green.bgWhite(`Potluck is running on port ${PORT}...`)));
