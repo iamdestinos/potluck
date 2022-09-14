@@ -14,7 +14,7 @@ app.use(express.static(staticPath));
 
 app.get('/event', (req, res) => {
   Event.find({})
-    .then(() => res.sendStatus(200))
+    .then((data) => res.status(200).json(data))
     .catch(() => res.sendStatus(500));
 });
 
@@ -23,5 +23,14 @@ app.post('/event', (req, res) => {
     .then(() => res.sendStatus(201))
     .catch(() => res.sendStatus(500));
 });
+
+app.get('/users', (req, res) => {
+  User.find({})
+    .then(data => {
+      console.log(data);
+      res.status(200).send(data);
+    })
+    .catch(err => res.sendStatus(500));
+})
 
 app.listen(PORT, () => console.log(clc.green.bgWhite(`Potluck is running on port ${PORT}...`)));
