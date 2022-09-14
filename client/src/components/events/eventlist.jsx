@@ -1,25 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Events from './events';
+import eventData from '../../../../server/src/sample-data/fake-events';
 
-const EventList = () => {
-  const [events] = useState([
-    'Algiers potluck',
-    'Nola potluck',
-    'Harvey potluck',
-    'Gretna potluck',
-  ]);
-  return (
-    <div className='eventlist'>
-      <h1>Event Card Component</h1>
-      {events.map((event, idx) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <div className="event-title" key={`${idx}`} 
-        onClick={(e) => console.log(e.target) }>
-          {event}
-        </div>
-      ))}
-    </div>
-  );
-};
-
+const EventList = () => (
+  <>
+    <h1>Event Card Component</h1>
+    {eventData.map((event, idx) => (
+      <li key={`${idx}`}>{event.location.address} Potluck</li>
+    ))}
+  </>
+);
 export default EventList;
