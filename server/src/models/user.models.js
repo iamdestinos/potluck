@@ -1,9 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema({
+  sub: String,
   email: String,
-  password: String,
-  username: String,
+  given_name: String,
+  name: String,
+  picture: String,
   events: [
     {
       type: Schema.Types.ObjectId,
