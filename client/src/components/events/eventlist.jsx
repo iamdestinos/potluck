@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import eventData from '../../../../server/src/sample-data/fake-events';
+
 
 const EventList = () => {
   const [selectedEvent, setSelectedEvent] = useState({});
 
   const handleEvent = (e) => {
+    console.log(e.target)
     eventData.forEach(event => {
       if (event._id === e.target.value) {
-       
+        setSelectedEvent(event);
+        console.log('selected', selectedEvent);
       }
     });
   };
