@@ -1,22 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+import eventData from '../../../../server/src/sample-data/fake-events';
 
-const Events = (event) => {
-  const [mainDish, setMainDish] = useState('chicken');
-
-  const changeMain = (e) => {
-    const mainDish = e.target.value;
-    setMainDish({mainDish});
-    console.log('mainDish: ', mainDish);
-  };
-
+const Events = () => {
+  const {time, location, foods} = eventData;
   return (
     <>
-      <div className="event">{event}</div>
-      <div className="main-dish"
-      onChange={changeMain}
-      >{mainDish}</div>
-      <div className="side-dish">sideDish</div>
-      <div className="attending">attending</div>
+      <div className='event'>Event</div>
+      <div className='main-dish'>Main Dish</div>
+      <div className='side-dish'>Side Dish</div>
+      <div className='attending'>Attending</div>
+
     </>
   );
 };
