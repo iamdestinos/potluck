@@ -6,12 +6,10 @@ export default [
     given_name: 'Eric',
     name: 'Eric Kuehnemann',
     picture: 'https://source.unsplash.com/1600x900/?guitar',
-    events: [
-      {
+    events: {
         eventIds: ['6', '8', '9'],
         ref: 'Event',
       },
-    ],
     clout: 50,
     awards: ['vegetarian master', 'sides ninja'],
     foods: [{}],
@@ -23,12 +21,10 @@ export default [
     given_name: 'Adonis',
     name: 'Adonis Suriel',
     picture: 'https://source.unsplash.com/1600x900/?guitar',
-    events: [
-      {
+    events: {
         eventIds: ['6', '7', '9'],
         ref: 'Event',
       },
-    ],
     clout: 100,
     awards: ['meat master', 'mains maniac'],
     foods: [{}],
@@ -40,12 +36,10 @@ export default [
     given_name: 'Fede',
     name: 'Federico Jimenez',
     picture: 'https://source.unsplash.com/1600x900/?guitar',
-    events: [
-      {
+    events: {
         eventIds: ['6', '7', '8'],
         ref: 'Event',
       },
-    ],
     clout: 250,
     awards: ['world traveler', 'sides ninja'],
     foods: [{}],
@@ -57,12 +51,10 @@ export default [
     given_name: 'John',
     name: 'John Hollister',
     picture: 'https://source.unsplash.com/1600x900/?guitar',
-    events: [
-      {
+    events: {
         eventIds: ['6', '7', '8', '9'],
         ref: 'Event',
       },
-    ],
     clout: 50,
     awards: ['meat master', 'mains maniac'],
     foods: [{}],
@@ -74,12 +66,10 @@ export default [
     given_name: 'Caity',
     name: 'Caity Opelka',
     picture: 'https://source.unsplash.com/1600x900/?guitar',
-    events: [
-      {
+    events: {
         eventIds: ['7', '8', '9'],
         ref: 'Event',
       },
-    ],
     clout: 50,
     awards: ['vegetarian master', 'sides ninja'],
     foods: [{}],
