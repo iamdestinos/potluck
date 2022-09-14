@@ -2,7 +2,7 @@
 
 Potluck Planner is an application that will help you organize or plan your next potluck dinner.
 
-***please visit*** [potluckplanner](https://18.224.108.253.nip.io/) ***to start planning.***
+***please visit*** [potluckplanner](https://18.222.86.237.nip.io/) ***to start planning.***
 
 ## Installation
 This installation is for development purposes **only**.
