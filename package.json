@@ -1,7 +1,7 @@
 {
   "name": "potluck",
   "version": "1.0.0",
-  "description": "This app is made to plan and organize potluck dinners.",
+  "description": "Plan and organize your next potluck dinners",
   "main": "index.js",
   "scripts": {
     "start": "node server/src/index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jimenezfede/potluck.git"
+    "url": "git+https://github.com/cowbirb/potluck.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jimenezfede/potluck/issues"
+    "url": "https://github.com/cowbirb/potluck/issues"
   },
-  "homepage": "https://github.com/jimenezfede/potluck#readme",
+  "homepage": "https://github.com/cowbirb/potluck#readme",
   "devDependencies": {
     "@babel/cli": "^7.18.10",
     "@babel/core": "^7.19.0",
@@ -45,6 +45,7 @@
     "@auth0/auth0-react": "^1.10.2",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
+    "cli-color": "^2.0.3",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "mapbox-gl": "^2.10.0",
