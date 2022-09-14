@@ -1,7 +1,7 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import Map from '../../components/map/map.component';
-import EventCard from '../../components/event-card/event-card.component';
+import EventList from '../../components/events/eventlist';
 
 const Home = () => (
   <>
@@ -15,7 +15,7 @@ const Home = () => (
           <Map />
         </div>
         <div className="col-md-6 text-center">
-          <EventCard />
+          <EventList />
         </div>
       </div>
     </div>
