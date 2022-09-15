@@ -16,11 +16,11 @@ app.use(express.json());
 const saveUser = async (user) => {
   // check if the user already exists
   try {
-    const doesExist = await User.exists({ sub: user.sub });
-    if (!doesExist) {
+    const userArray = await User.find({ sub: user.sub });
+    if (!userArray.length) {
       return await User.create(user);
     }
-    return 'User already exists';
+    return userArray[0];
   } catch (err) {
     console.log('This is the error from saveUser:\n', err);
     return err;
@@ -28,10 +28,11 @@ const saveUser = async (user) => {
   // if not, save the user to the database
 };
 
-app.post('/', (req, res) => {
-  saveUser(req.body)
-    .then(() => {
-      res.sendStatus(201);
+app.post('/user', (req, res) => {
+  saveUser(req.body.user)
+    .then((data) => {
+      // console.log('This is the data from POST req:\n', data);
+      res.status(201).json(data);
     })
     .catch((err) => {
       console.log('This is the error from the POST request:\n', err);
