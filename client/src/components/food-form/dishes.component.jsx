@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Dish from './dish.component.jsx';
 
-function Dishes (props) {
+const Dishes = (props) => {
     const [foods, setFoods] = useState(props.foods);
     const [value, setValue] = useState('');
 
