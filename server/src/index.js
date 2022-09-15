@@ -57,7 +57,7 @@ app.get('/users', (req, res) => {
       console.log(data);
       res.status(200).send(data);
     })
-    .catch((err) => res.sendStatus(500));
+    .catch(() => res.sendStatus(500));
 });
 
 app.listen(PORT, () => console.log(clc.green.bgWhite(`Potluck is running on port ${PORT}...`)));
