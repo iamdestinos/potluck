@@ -1,12 +1,16 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'inline-source-map',
-  entry: './client/src/index.js',
+  entry: {
+    bundle: path.resolve(__dirname, 'client/src/index.js'),
+},
   output: {
     path: path.resolve(__dirname, 'client/src/public/dist/'),
-    filename: 'bundle.js',
+    filename: '[name].js',
+    clean: true,
   },
   module: {
     rules: [
@@ -27,14 +31,32 @@ module.exports = {
   resolve: { extensions: ['*', '.js', '.jsx'] },
   mode: 'development',
   devServer: {
-    contentBase: path.join(__dirname, 'client/src/public/'),
-    port: 3000,
-    publicPath: 'http://localhost:3000/dist/',
-    hotOnly: true,
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
+    proxy: [
+      {
+        // context: ['/auth', '/api'],
+        // target: 'http://localhost:3000',
+        '/': 'http://localhost:3000',
+      },
+    ],
+    compress: true,
+    client: {
+      overlay: true,
+    },
+    open: true,
+    hot: true,
+    historyApiFallback: true,
   },
   plugins: [
     new Dotenv({
       systemvars: true,
+    }),
+    new HtmlWebpackPlugin({
+      title: 'potluck',
+      filename: 'index.html',
+      template: 'client/src/public/template.html',
     }),
   ],
 };
