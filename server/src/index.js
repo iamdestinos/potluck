@@ -3,7 +3,7 @@ const path = require('path');
 const clc = require('cli-color');
 require('dotenv').config();
 require('./db');
-const { User, Event } = require('./models/index');
+const { User } = require('./models/index');
 // const { saveUser } = require('./controllers/user.controllers');
 
 const { PORT } = process.env;
@@ -18,7 +18,6 @@ const saveUser = async (user) => {
   // check if the user already exists
   try {
     const doesExist = await User.exists({ sub: user.sub });
-    console.log('doesExist: ', doesExist);
     if (!doesExist) {
       return await User.create(user);
     }
@@ -31,11 +30,8 @@ const saveUser = async (user) => {
 };
 
 app.post('/', (req, res) => {
-  const { user } = req.body;
-
-  saveUser(user)
-    .then((data) => {
-      console.log('This is data from saveUser:\n', data);
+  saveUser(req.body)
+    .then(() => {
       res.sendStatus(201);
     })
     .catch((err) => {
