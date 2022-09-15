@@ -11,12 +11,10 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const value = { currentUser, setCurrentUser };
 
-  console.log('This is current user in UserProvider:', currentUser);
   useEffect(() => {
     if (isAuthenticated) {
       axios.post('/user', { user })
         .then(({ data }) => {
-          console.log('This is some data from useEffect:', data);
           setCurrentUser(data);
         })
         .catch((err) => {

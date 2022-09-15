@@ -31,7 +31,6 @@ const saveUser = async (user) => {
 app.post('/user', (req, res) => {
   saveUser(req.body.user)
     .then((data) => {
-      // console.log('This is the data from POST req:\n', data);
       res.status(201).json(data);
     })
     .catch((err) => {

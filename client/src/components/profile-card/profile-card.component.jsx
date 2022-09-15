@@ -4,7 +4,6 @@ import { UserContext } from '../../contexts/user.context';
 
 const ProfileCard = () => {
   const { currentUser } = useContext(UserContext);
-  console.log('This is currentUser within ProfileCard: ', currentUser);
   return (
     <div className="card text-bg-light mb-3" style={{ maxWidth: '18rem' }}>
       <img className="card-img-top" src={currentUser.picture} alt={currentUser.name} />
