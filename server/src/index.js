@@ -51,13 +51,19 @@ app.post('/event', (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
-app.get('/users', (req, res) => {
-  User.find({})
-    .then((data) => {
-      console.log(data);
-      res.status(200).send(data);
-    })
-    .catch(() => res.sendStatus(500));
-});
+// app.get('/user', (req, res) => {
+//   User.find({})
+//     .then((data) => {
+//       console.log(data);
+//       res.status(200).send(data);
+//     })
+//     .catch(() => res.sendStatus(500));
+// });
+
+// // create an endpoint for updating the user
+// app.patch('/user', (req, res) => {
+//   // locate the user and update
+//   User.findByIdAndUpdate(req.body.user._id, )
+// });
 
 app.listen(PORT, () => console.log(clc.green.bgWhite(`Potluck is running on port ${PORT}...`)));
