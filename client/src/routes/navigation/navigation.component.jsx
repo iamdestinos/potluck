@@ -16,7 +16,7 @@ const Navigation = () => {
   const save0AuthUser = () => {
     // const { user } = useAuth0();
     // send an axios request to POST a new user to the db
-    if (!user.sub) {
+    if (user) {
       axios.post('/', user)
         .catch((err) => {
           console.log('The error from the axios POST saveUser request:\n', err);
