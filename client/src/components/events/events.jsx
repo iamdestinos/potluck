@@ -1,9 +1,9 @@
 import React from 'react';
-import eventData from '../../../../server/src/sample-data/fake-events';
 
-const Events = ({ event }) => (
+
+const Events = ({ event, handleEvent }) => (
   <>
-    <div className='event'>{event}</div>
+    <div className='event' onClick={() => handleEvent(event)}>{event.location.address}</div>
   </>
 );
 
