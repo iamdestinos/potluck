@@ -1,15 +1,16 @@
-import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+import React, { useContext } from 'react';
+// import { useAuth0 } from '@auth0/auth0-react';
+import { UserContext } from '../../contexts/user.context';
 
 const ProfileCard = () => {
-  const { user } = useAuth0();
-
+  const { currentUser } = useContext(UserContext);
+  console.log('This is currentUser within ProfileCard: ', currentUser);
   return (
     <div className="card text-bg-light mb-3" style={{ maxWidth: '18rem' }}>
-      <img className="card-img-top" src={user.picture} alt={user.name} />
+      <img className="card-img-top" src={currentUser.picture} alt={currentUser.name} />
       <div className="card-body text-center">
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
+        <h2>{currentUser.name}</h2>
+        <p>{currentUser.email}</p>
         <p>clout: 🍲🍲🍲🍲🍲🍲</p>
       </div>
       <ul className="list-group list-group-flush">
