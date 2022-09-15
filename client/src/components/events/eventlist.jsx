@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
+import Events from './events';
+import EventProfile from './eventprofile';
 import eventData from '../../../../server/src/sample-data/fake-events';
 
-
 const EventList = () => {
-  const [selectedEvent, setSelectedEvent] = useState({});
+  const [selectedEvent, setSelectedEvent] = useState();
 
-  const handleEvent = (e) => {
-    console.log(e.target)
-    eventData.forEach(event => {
-      if (event._id === e.target.value) {
-        setSelectedEvent(event);
-        console.log('selected', selectedEvent);
-      }
-    });
+  const handleEvent = (event) => {
+    console.log(event);
+    setSelectedEvent(event);
   };
+
   return (
     <>
-      <h1>Event Card Component</h1>
       {eventData.map((event) => (
-        <li key={event._id} value={event._id} onClick={(e) => handleEvent(e)}>
-          {event.location.address} Potluck
-        </li>
+        <Events
+          key={event._id}
+          event={event}
+          handleEvent={handleEvent}
+        />
       ))}
     </>
   );
