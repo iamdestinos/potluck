@@ -10,7 +10,7 @@ const ProfileCard = () => {
   useEffect(() => {
     axios.get(`/event/users/${currentUser._id}`)
       .then(({ data }) => {
-        console.log('Heres the events I found:\n', data);
+        // console.log('Heres the events I found:\n', data);
         setUserEvents(data);
       })
       .catch((err) => {
@@ -18,7 +18,7 @@ const ProfileCard = () => {
       });
   }, []);
 
-  console.log('HERES THE DANG userEVENTS!:\n', userEvents);
+  // console.log('HERES THE DANG userEVENTS!:\n', userEvents);
 
   return (
     <div className="card text-bg-light mb-3" style={{ maxWidth: '18rem' }}>
