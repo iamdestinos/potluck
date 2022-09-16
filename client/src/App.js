@@ -5,16 +5,15 @@ import Navigation from './routes/navigation/navigation.component';
 import Home from './routes/home/home.component';
 import Profile from './routes/profile/profile.component';
 import EventList from './components/events/eventlist';
-import EventProfile from './components/events/eventprofile';
-
+import EventProfile from './routes/eventprofile/eventprofile.component';
 
 const App = () => (
   <Routes>
     <Route path="/" element={<Navigation />}>
       <Route index element={<Home />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/eventlist" element={<EventList />} />
-      <Route path="/eventprofile" element={<EventProfile />} />
+      {/* <Route path="/eventlist" element={<EventList />} /> */}
+      <Route path="/eventprofile/:id" element={<EventProfile />} />
     </Route>
   </Routes>
 );
