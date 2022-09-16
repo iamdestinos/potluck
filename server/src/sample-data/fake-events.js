@@ -32,9 +32,7 @@ export default [
       course: 'main',
       ref: 'User',
     }],
-    attending: {
-      userIds: ['1', '2', '3', '4'],
-    },
+    attending: ['1', '2', '3', '4'],
   },
   {
     _id: '7',
@@ -69,9 +67,7 @@ export default [
       course: 'side',
       ref: 'User',
     }],
-    attending: {
-      userIds: ['2', '3', '4', '5'],
-    },
+    attending: ['2', '3', '4', '5'],
   },
   {
     _id: '8',
@@ -106,9 +102,7 @@ export default [
       course: 'main',
       ref: 'User',
     }],
-    attending: {
-      userIds: ['1', '5', '3', '4'],
-    },
+    attending: ['1', '5', '3', '4'],
   },
   {
     _id: '9',
@@ -143,8 +137,6 @@ export default [
       course: 'side',
       ref: 'User',
     }],
-    attending: {
-      userIds: ['1', '2', '5', '4'],
-    },
+    attending: ['1', '2', '5', '4'],
   },
 ];
