@@ -1,34 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Events from './events';
-import EventProfile from './eventprofile';
-import eventData from '../../../../server/src/sample-data/fake-events';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { EventsContext } from '../../contexts/events.context';
 
 const EventList = () => {
-  const [selectedEvent, setSelectedEvent] = useState();
-  const [events, setEvents] = useState([]);
+  const { events } = useContext(EventsContext);
+  // const [selectedEvent, setSelectedEvent] = useState();
 
-  useEffect(() => {
-    axios.get('/event')
-      .then(result => {
-        console.log(result.data);
-        setEvents(result.data);
-      })
-      .catch(err => console.log('Get request unsuccessful', err));
-  }, []);
+  // const handleEvent = (event) => {
+  //   console.log(event);
+  //   setSelectedEvent(event);
+  // };
 
-  const handleEvent = (event) => {
-    console.log(event);
-    setSelectedEvent(event);
-  };
-  return selectedEvent ?
-  (<EventProfile selectedEvent={selectedEvent} />):
-  (
+  return (
     <div>
-      {events.map(event => (
-        <Events key={event._id} event={event} handleEvent={handleEvent} />
+      {events.map((event) => (
+        <Link key={event._id} to={`/eventprofile/${event._id}`}>
+          {event.eventName}
+        </Link>
       ))}
     </div>
   );
 };
+
 export default EventList;
