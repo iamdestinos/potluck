@@ -17,9 +17,9 @@ const Home = () => (
         </div>
         <div className='col-md-6 text-center'>
           <h1>Event Card Component</h1>
-          <Link to="/eventProfile">
-            <EventList />
-          </Link>
+          {/* <Link to="/eventProfile">
+          </Link> */}
+          <EventList />
         </div>
       </div>
     </div>
