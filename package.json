@@ -8,7 +8,7 @@
     "build": "webpack",
     "build2": "webpack --watch",
     "dev2": "concurrently -n webpack,server --kill-others \"npm run build2\" \"npm start\" ",
-    "dev": "npm start & npm run build --watch"
+    "dev": "npm run build --watch && npm start"
   },
   "repository": {
     "type": "git",

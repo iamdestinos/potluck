@@ -74,6 +74,7 @@ app.post('/event', (req, res) => {
     });
 });
 
+// create an endpoint to retrieve ALL events
 app.get('/event', (req, res) => {
   Event.find({})
     .then((data) => res.status(200).json(data))
