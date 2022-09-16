@@ -3,6 +3,8 @@ import React, { useContext } from 'react';
 import { UserContext } from '../../contexts/user.context';
 
 const ProfileCard = () => {
+  // send a get request to the event database that returns the events the current user is attending
+
   const { currentUser } = useContext(UserContext);
   return (
     <div className="card text-bg-light mb-3" style={{ maxWidth: '18rem' }}>
