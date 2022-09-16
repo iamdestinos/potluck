@@ -8,16 +8,8 @@ const eventSchema = new Schema({
     state: String,
     zip: String,
   },
-  foods: [{
-    type: Schema.Types.ObjectId,
-    name: String,
-    course: String,
-    ref: 'User',
-  }],
-  attending: [{
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  }],
+  foods: [],
+  attending: [],
 });
 
 module.exports = model('Event', eventSchema);
