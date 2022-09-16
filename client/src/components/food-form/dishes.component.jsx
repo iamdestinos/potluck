@@ -48,7 +48,11 @@ const Dishes = (props) => {
                         }
                     } }
                     ></input>
-                <button className='col-sm-2' onClick={ clickHandler }>+</button>
+                <button 
+                    className='col-sm-2' 
+                    onClick={ clickHandler }
+                    disabled={value === '' || !currentUser}
+                    >+</button>
             </div>
             <ul className='list-group float-left d-flex justify-content-between'>
                 {foods.map((food, index) => {
