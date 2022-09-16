@@ -4,17 +4,17 @@ import FoodForm from '../food-form/food-form.component';
 const EventProfile = ({
   selectedEvent: {
     time,
-    location: { address },
+    eventName,
     foods,
-    attending: { userIds },
+    attending,
   },
 }) => (
   <div>
-    <h1>{address}</h1>
+    <h1>{eventName}</h1>
     <div className='main-dish'></div>
     <div className='side-dish'></div>
     <FoodForm foods={foods} />
-    <div className='attending'>{`${userIds.length} people attending`}</div>
+    <div className='attending'>{`${attending.length} people attending`}</div>
   </div>
 );
 
