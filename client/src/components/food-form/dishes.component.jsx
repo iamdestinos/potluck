@@ -9,14 +9,12 @@ const Dishes = (props) => {
     const { currentUser } = useContext(UserContext);
 
     const clickHandler = () => {
-        //create food object to be passed
         let newFood = {
             name: value,
             course: props.title === 'Main Dishes' ? 'main' : 'side',
             userId: currentUser._id,
         }
-        console.log('button clicked!', newFood);
-        //add new food
+        
         axios.put(`/event/${props.eventId}`, { food: newFood })
             .then(result => {
                 setFoods(foods.concat(newFood));
@@ -25,8 +23,6 @@ const Dishes = (props) => {
             .catch(err => {
                 console.log(err);
             });
-            //need event identification
-            
     }
 
     const inputHandler = (e) => {
