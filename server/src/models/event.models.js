@@ -1,23 +1,18 @@
 const { Schema, model } = require('mongoose');
 
 const eventSchema = new Schema({
-  time: Date,
+  host: String,
+  eventDate: Date,
+  eventTime: String,
+  eventName: String,
   location: {
     address: String,
     city: String,
     state: String,
     zip: String,
   },
-  foods: [{
-    type: Schema.Types.ObjectId,
-    name: String,
-    course: String,
-    ref: 'User',
-  }],
-  attending: [{
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  }],
+  foods: [],
+  attending: [],
 });
 
 module.exports = model('Event', eventSchema);
