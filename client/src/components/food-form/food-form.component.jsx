@@ -8,16 +8,17 @@ const FoodForm = (props) => {
   return (
     <div className='container'>
       <div className='row text-center'>
-        <div>Food Form Component</div>
         <Dishes
           className='col'
           title='Main Dishes'
           foods={foods.filter((food) => food.course === 'main')}
+          eventId={ props.eventId }
         ></Dishes>
         <Dishes
           className='col'
           title='Side Dishes'
           foods={foods.filter((food) => food.course === 'side')}
+          eventId={ props.eventId }
         ></Dishes>
       </div>
     </div>

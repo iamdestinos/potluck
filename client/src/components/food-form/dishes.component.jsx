@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
-
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import Dish from './dish.component.jsx';
+import { UserContext } from '../../contexts/user.context';
 
 const Dishes = (props) => {
     const [foods, setFoods] = useState(props.foods);
     const [value, setValue] = useState('');
+    const { currentUser } = useContext(UserContext);
 
     const clickHandler = () => {
-        console.log('button clicked!', value);
+        let newFood = {
+            name: value,
+            course: props.title === 'Main Dishes' ? 'main' : 'side',
+            userId: currentUser._id,
+        }
+        
+        axios.put(`/event/${props.eventId}`, { food: newFood })
+            .then(result => {
+                setFoods(foods.concat(newFood));
+                setValue('');
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     const inputHandler = (e) => {
@@ -29,7 +44,11 @@ const Dishes = (props) => {
                         }
                     } }
                     ></input>
-                <button className='col-sm-2' onClick={ clickHandler }>+</button>
+                <button 
+                    className='col-sm-2' 
+                    onClick={ clickHandler }
+                    disabled={value === '' || !currentUser}
+                    >+</button>
             </div>
             <ul className='list-group float-left d-flex justify-content-between'>
                 {foods.map((food, index) => {

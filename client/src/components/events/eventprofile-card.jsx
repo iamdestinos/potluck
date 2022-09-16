@@ -6,7 +6,7 @@ const EventProfileCard = ({ selectedEvent }) => (
     <h1>{selectedEvent.eventName}</h1>
     <div className="main-dish" />
     <div className="side-dish" />
-    <FoodForm foods={selectedEvent.foods} />
+    <FoodForm foods={selectedEvent.foods} eventId={selectedEvent._id}/>
     <div className="attending">{`${selectedEvent.attending.length} people attending`}</div>
   </div>
 );
