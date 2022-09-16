@@ -16,11 +16,11 @@ app.use(express.json());
 const saveUser = async (user) => {
   // check if the user already exists
   try {
-    const doesExist = await User.exists({ sub: user.sub });
-    if (!doesExist) {
+    const userArray = await User.find({ sub: user.sub });
+    if (!userArray.length) {
       return await User.create(user);
     }
-    return 'User already exists';
+    return userArray[0];
   } catch (err) {
     console.log('This is the error from saveUser:\n', err);
     return err;
@@ -28,10 +28,10 @@ const saveUser = async (user) => {
   // if not, save the user to the database
 };
 
-app.post('/', (req, res) => {
-  saveUser(req.body)
-    .then(() => {
-      res.sendStatus(201);
+app.post('/user', (req, res) => {
+  saveUser(req.body.user)
+    .then((data) => {
+      res.status(201).json(data);
     })
     .catch((err) => {
       console.log('This is the error from the POST request:\n', err);
@@ -51,13 +51,19 @@ app.post('/event', (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
-app.get('/users', (req, res) => {
-  User.find({})
-    .then((data) => {
-      console.log(data);
-      res.status(200).send(data);
-    })
-    .catch(() => res.sendStatus(500));
-});
+// app.get('/user', (req, res) => {
+//   User.find({})
+//     .then((data) => {
+//       console.log(data);
+//       res.status(200).send(data);
+//     })
+//     .catch(() => res.sendStatus(500));
+// });
+
+// // create an endpoint for updating the user
+// app.patch('/user', (req, res) => {
+//   // locate the user and update
+//   User.findByIdAndUpdate(req.body.user._id, )
+// });
 
 app.listen(PORT, () => console.log(clc.green.bgWhite(`Potluck is running on port ${PORT}...`)));

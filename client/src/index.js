@@ -7,6 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
+import { UserProvider } from './contexts/user.context';
 
 const { DOMAIN } = process.env;
 const { CLIENT_ID } = process.env;
@@ -20,7 +21,9 @@ root.render(
       clientId={CLIENT_ID}
       redirectUri={window.location.origin}
     >
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </Auth0Provider>
   </BrowserRouter>,
 );
