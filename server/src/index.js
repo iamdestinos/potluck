@@ -34,7 +34,9 @@ const saveEvent = async (event) => {
   // check if the event already exists. if not, create it
   try {
     const eventArray = await Event.find({
-      time: event.time,
+      eventName: event.eventName,
+      eventDate: event.eventDate,
+      host: event.host,
     });
     if (!eventArray.length) {
       return await Event.create(event);
@@ -83,7 +85,7 @@ app.get('/event/users/:userId', (req, res) => {
   // access the userId from the request params
   const { userId } = req.params;
   // query the event collections for events where the attending property contains the userId
-  Event.find({ 'attending.userIds': userId })
+  Event.find({ attending: userId })
     //  then send the events back with a 200 status
     .then((events) => {
       res.status(200).json(events);
