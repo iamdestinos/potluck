@@ -11,14 +11,12 @@ const EventList = () => {
   useEffect(() => {
     axios.get('/event')
       .then(result => {
-        console.log(result.data);
         setEvents(result.data);
       })
       .catch(err => console.log('Get request unsuccessful', err));
   }, []);
 
   const handleEvent = (event) => {
-    console.log(event);
     setSelectedEvent(event);
   };
   return selectedEvent ?
