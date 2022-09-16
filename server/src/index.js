@@ -88,7 +88,6 @@ app.put('/event/:eventId', (req, res) => {
       console.error('error updating event:', err);
       res.sendStatus(500);
     } else {
-      console.log('updated event:', updatedObj);
       res.json(updatedObj);
     }
   });
