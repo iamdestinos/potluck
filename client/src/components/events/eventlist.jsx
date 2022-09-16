@@ -6,11 +6,14 @@ import eventData from '../../../../server/src/sample-data/fake-events';
 
 const EventList = () => {
   const [selectedEvent, setSelectedEvent] = useState();
-  const [events, setEvents] = useState({});
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     axios.get('/event')
-      .then(result => console.log(result))
+      .then(result => {
+        console.log(result.data);
+        setEvents(result.data);
+      })
       .catch(err => console.log('Get request unsuccessful', err));
   }, []);
 
@@ -22,7 +25,7 @@ const EventList = () => {
   (<EventProfile selectedEvent={selectedEvent} />):
   (
     <div>
-      {eventData.map(event => (
+      {events.map(event => (
         <Events key={event._id} event={event} handleEvent={handleEvent} />
       ))}
     </div>
