@@ -1,7 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const eventSchema = new Schema({
-  time: Date,
+  host: String,
+  eventDate: Date,
+  eventTime: String,
+  eventName: String,
   location: {
     address: String,
     city: String,
