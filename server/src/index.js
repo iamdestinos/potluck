@@ -80,6 +80,20 @@ app.get('/event', (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
+app.put('/event/:eventId', (req, res) => {
+  const { eventId } = req.params;
+
+  Event.findOneAndUpdate({ _id: eventId }, { $push: { foods: req.body.food } }, (err, updatedObj) => {
+    if (err) {
+      console.error('error updating event:', err);
+      res.sendStatus(500);
+    } else {
+      console.log('updated event:', updatedObj);
+      res.json(updatedObj);
+    }
+  });
+});
+
 // create an endpoint to retrieve all of the events the user is attending
 app.get('/event/users/:userId', (req, res) => {
   // access the userId from the request params
@@ -95,6 +109,19 @@ app.get('/event/users/:userId', (req, res) => {
       console.log('This is the error from Event.find inside route to userId parameter:\n', err);
       res.sendStatus(500);
     });
+});
+
+app.get('/event/:eventId', (req, res) => {
+  const { eventId } = req.params;
+
+  Event.findOne({ _id: eventId })
+    .then(event => {
+      res.status(200).json(event);
+    })
+    .catch(err => {
+      console.error('error finding request', eventId, err);
+      res.sendStatus(500);
+    })
 });
 
 // app.get('/user', (req, res) => {
