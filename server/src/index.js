@@ -13,6 +13,7 @@ const staticPath = path.resolve(__dirname, '../../client/src/public');
 app.use(express.static(staticPath));
 app.use(express.json());
 
+// helper function for saving a new user
 const saveUser = async (user) => {
   // check if the user already exists
   try {
@@ -28,6 +29,24 @@ const saveUser = async (user) => {
   // if not, save the user to the database
 };
 
+// helper function for saving a new event
+const saveEvent = async (event) => {
+  // check if the event already exists. if not, create it
+  try {
+    const eventArray = await Event.find({
+      time: event.time,
+    });
+    if (!eventArray.length) {
+      return await Event.create(event);
+    }
+    return eventArray[0];
+  } catch (err) {
+    console.log('This is the error from saveEvent inside POST route:\n', err);
+    return err;
+  }
+};
+
+// endpoint for creating a new user
 app.post('/user', (req, res) => {
   saveUser(req.body.user)
     .then((data) => {
@@ -39,15 +58,23 @@ app.post('/user', (req, res) => {
     });
 });
 
+// endpoint fot creating a new event
+app.post('/event', (req, res) => {
+  console.log('This is the req.body:\n', req.body);
+  saveEvent(req.body.event)
+    .then((data) => {
+      console.log('This is the data from the event POST request:\n', data);
+      res.status(201).json(data);
+    })
+    .catch((err) => {
+      console.log('This is the error from the POST request to /event:\n', err);
+      res.sendStatus(500);
+    });
+});
+
 app.get('/event', (req, res) => {
   Event.find({})
     .then((data) => res.status(200).json(data))
-    .catch(() => res.sendStatus(500));
-});
-
-app.post('/event', (req, res) => {
-  Event.create({})
-    .then(() => res.sendStatus(201))
     .catch(() => res.sendStatus(500));
 });
 
