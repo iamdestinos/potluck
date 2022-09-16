@@ -78,6 +78,23 @@ app.get('/event', (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
+// create an endpoint to retrieve all of the events the user is attending
+app.get('/event/users/:userId', (req, res) => {
+  // access the userId from the request params
+  const { userId } = req.params;
+  // query the event collections for events where the attending property contains the userId
+  Event.find({ 'attending.userIds': userId })
+    //  then send the events back with a 200 status
+    .then((events) => {
+      res.status(200).json(events);
+    })
+    // catch the errors and respond with a 500
+    .catch((err) => {
+      console.log('This is the error from Event.find inside route to userId parameter:\n', err);
+      res.sendStatus(500);
+    });
+});
+
 // app.get('/user', (req, res) => {
 //   User.find({})
 //     .then((data) => {
