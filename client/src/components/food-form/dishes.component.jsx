@@ -20,6 +20,7 @@ const Dishes = (props) => {
         axios.put(`/event/${props.eventId}`, { food: newFood })
             .then(result => {
                 console.log(result);
+                setFoods(foods.concat(newFood));
             })
             .catch(err => {
                 console.log(err);
