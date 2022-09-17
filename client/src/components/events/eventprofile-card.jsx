@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import FoodForm from '../food-form/food-form.component';
 
-const EventProfileCard = ({ selectedEvent }) => (
+const EventProfileCard = ({ selectEvent: {eventName, foods, _id, attending} }) => (
   <div className="card text-bg-light mb-3" style={{ maxWidth: '80em' }}>
-    <h1>{selectedEvent.eventName}</h1>
-    <FoodForm foods={selectedEvent.foods} eventId={selectedEvent._id} attending={selectedEvent.attending} />
-    <div className="attending">{`${selectedEvent.attending.length} people attending`}</div>
+    <h1>{eventName}</h1>
+    <FoodForm foods={foods} eventId={_id} attending={attending} />
+    <div className="attending">{`${attending.length} people attending`}</div>
   </div>
 );
 
