@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Dish from './dish.component.jsx';
 import { UserContext } from '../../contexts/user.context';
+import cloutEnhancer from '../../controllers/clout-enhancements.js';
 
 const Dishes = (props) => {
   const [foods, setFoods] = useState(props.foods);
@@ -27,6 +28,9 @@ const Dishes = (props) => {
         console.log(err);
         setLoad('Error adding dish, please try again');
       });
+
+    // add some clout when newFood is added
+    cloutEnhancer(currentUser._id, 3);
   };
 
   const inputHandler = (e) => {
