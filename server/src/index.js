@@ -83,7 +83,6 @@ app.get('/event', (req, res) => {
 
 app.put('/event/:eventId', (req, res) => {
   const { eventId } = req.params;
-
   Event.findOneAndUpdate({ _id: eventId }, { $push: { foods: req.body.food } }, (err, updatedObj) => {
     if (err) {
       console.error('error updating event:', err);
@@ -120,6 +119,32 @@ app.delete('/event/:eventId', (req, res) => {
   });
 });
 
+app.put('/event/going/:eventId', (req, res) => {
+  const {params: {eventId}, body: {event}} = req;
+  Event.updateOne({_id: eventId}, event)
+    .then(({modifiedCount}) => {
+      if ({modifiedCount}) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch(() => res.sendStatus(500))
+})
+
+app.put('/user/:id', (req, res) => {
+  const {params: {id}, body: {user}} = req;
+  User.updateOne({_id: user.id}, {user})
+    .then(({modifiedCount}) =>  {
+      if ({modifiedCount}) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch(() => res.sendStatus(500))
+})
+
 // create an endpoint to retrieve all of the events the user is attending
 app.get('/event/users/:userId', (req, res) => {
   // access the userId from the request params
@@ -139,7 +164,6 @@ app.get('/event/users/:userId', (req, res) => {
 
 app.get('/event/:eventId', (req, res) => {
   const { eventId } = req.params;
-
   Event.findOne({ _id: eventId })
     .then(event => {
       res.status(200).json(event);
@@ -149,20 +173,5 @@ app.get('/event/:eventId', (req, res) => {
       res.sendStatus(500);
     })
 });
-
-// app.get('/user', (req, res) => {
-//   User.find({})
-//     .then((data) => {
-//       console.log(data);
-//       res.status(200).send(data);
-//     })
-//     .catch(() => res.sendStatus(500));
-// });
-
-// // create an endpoint for updating the user
-// app.patch('/user', (req, res) => {
-//   // locate the user and update
-//   User.findByIdAndUpdate(req.body.user._id, )
-// });
 
 app.listen(PORT, () => console.log(clc.green.bgWhite(`Potluck is running on port ${PORT}...`)));
