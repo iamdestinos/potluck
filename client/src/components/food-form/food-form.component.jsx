@@ -13,12 +13,14 @@ const FoodForm = (props) => {
           title="Main Dishes"
           foods={foods.filter((food) => food.course === 'main')}
           eventId={props.eventId}
+          attending={props.attending}
         />
         <Dishes
           className="col"
           title="Side Dishes"
           foods={foods.filter((food) => food.course === 'side')}
           eventId={props.eventId}
+          attending={props.attending}
         />
       </div>
       <div className="row text-center">
@@ -27,12 +29,14 @@ const FoodForm = (props) => {
           title="Bread"
           foods={foods.filter((food) => food.course === 'bread')}
           eventId={props.eventId}
+          attending={props.attending}
         />
         <Dishes
           className="col"
           title="Salads"
           foods={foods.filter((food) => food.course === 'salad')}
           eventId={props.eventId}
+          attending={props.attending}
         />
       </div>
       <div className="row text-center">
@@ -41,12 +45,14 @@ const FoodForm = (props) => {
           title="Desserts"
           foods={foods.filter((food) => food.course === 'dessert')}
           eventId={props.eventId}
+          attending={props.attending}
         />
         <Dishes
           className="col"
           title="Other"
           foods={foods.filter((food) => food.course === 'other')}
           eventId={props.eventId}
+          attending={props.attending}
         />
       </div>
     </div>
