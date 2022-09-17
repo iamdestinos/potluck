@@ -21,6 +21,34 @@ const FoodForm = (props) => {
           eventId={props.eventId}
         />
       </div>
+      <div className="row text-center">
+        <Dishes
+          className="col"
+          title="Bread"
+          foods={foods.filter((food) => food.course === 'bread')}
+          eventId={props.eventId}
+        />
+        <Dishes
+          className="col"
+          title="Salads"
+          foods={foods.filter((food) => food.course === 'salad')}
+          eventId={props.eventId}
+        />
+      </div>
+      <div className="row text-center">
+        <Dishes
+          className="col"
+          title="Desserts"
+          foods={foods.filter((food) => food.course === 'dessert')}
+          eventId={props.eventId}
+        />
+        <Dishes
+          className="col"
+          title="Other"
+          foods={foods.filter((food) => food.course === 'other')}
+          eventId={props.eventId}
+        />
+      </div>
     </div>
   );
 };

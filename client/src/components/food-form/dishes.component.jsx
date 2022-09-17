@@ -12,7 +12,7 @@ const Dishes = (props) => {
   const clickHandler = () => {
     const newFood = {
       name: value,
-      course: props.title === 'Main Dishes' ? 'main' : 'side',
+      course: props.title === 'Main Dishes' ? 'main' : props.title === 'Side Dishes' ? 'side' : props.title === 'Bread' ? 'bread' : props.title === "Salads" ? 'salad' : props.title === "Desserts" ? "dessert" : "other",
       userId: currentUser._id,
     };
 
