@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../contexts/user.context';
+import { EventsContext } from '../../contexts/events.context';
 import ProfileCard from '../../components/profile-card/profile-card.component';
 import EventProfileCard from '../../components/events/eventprofile-card';
 
@@ -24,9 +25,9 @@ const Profile = () => {
       <div className="d-flex justify-content-around pt-5">
         <ProfileCard />
       </div>
-      <div className="d-flex justify-content-around pt-5">
-        {userEvents.map((event) => <EventProfileCard selectedEvent={event} />)}
-      </div>
+      {/* <div className="d-flex justify-content-around pt-5">
+        {userEvents.map((event) => <EventProfileCard key={event._id} view="profile" selectedEvent={event} />)}
+      </div> */}
     </>
   );
 };
