@@ -11,8 +11,6 @@ const ProfileCard = () => {
   const { currentUser } = useContext(UserContext);
   const { events } = useContext(EventsContext);
   const userEvents = events.filter((event) => event.attending.includes(currentUser._id));
-  console.log('events:\n', events);
-  console.log('userEvents:\n', userEvents);
 
   // create a number
   const cloutDivided = Math.floor(currentUser.clout / 10);
