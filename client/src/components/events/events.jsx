@@ -25,7 +25,7 @@ const Events = ({ event, view }) => {
 
   return (
     <>
-      <h3>{event.eventName}</h3>
+      <h4>{event.eventName}</h4>
       {renderView()}
     </>
   );
