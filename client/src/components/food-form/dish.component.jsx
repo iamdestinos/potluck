@@ -8,6 +8,8 @@ const Dish = (props) => {
   const bool = currentUser ? currentUser._id : null;
   const [style, setStyle] = useState(bool === food.userId ? { fontWeight: 'bold' } : { fontWeight: 'normal' });
   const [loading, setLoad] = useState(false);
+  const [isEdit, setEdit] = useState(false);
+  const [editVal, setVal] = useState(food.name);
 
   const clickDelHandler = () => {
     if (bool === food.userId) {
@@ -24,7 +26,7 @@ const Dish = (props) => {
   };
 
   const clickEditHandler = () => {
-    const newName = prompt('Enter new food:');
+    const newName = editVal;
     const newFood = {
       name: newName,
       course: food.course,
@@ -36,18 +38,43 @@ const Dish = (props) => {
       .then(result => {
         setFood(newFood);
         setLoad(false);
+        setEdit(false);
       })
       .catch(err => {
         console.error(err);
         setLoad(false);
+        setEdit(false);
       });
   };
 
+  const inputHandler = (e) => {
+    setVal(e.target.value);
+  }
+
   return <li style={ style }>
-      {food.name}
-      { bool === food.userId ?
+      {isEdit ? 
+        <div className="row float-center">
+          <input 
+            className="col-sm-9"
+            value={editVal}
+            onChange={inputHandler}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                clickEditHandler();
+              }
+            }}
+            ></input>
+          <button 
+            className="col-sm-1"
+            onClick={clickEditHandler}
+            disabled={loading}
+            >X</button>
+        </div>
+        : food.name
+      }
+      { (bool === food.userId) && !isEdit ?
         <span className='float-right justify-content-between'>
-          <button onClick={clickEditHandler} disabled={loading}>Edit</button>
+          <button onClick={() => setEdit(true)} disabled={loading}>Edit</button>
           <button onClick={clickDelHandler} disabled={loading}>Del</button>
         </span>
         : ''
