@@ -94,6 +94,19 @@ app.put('/event/:eventId', (req, res) => {
   });
 });
 
+app.delete('/event/:eventId', (req, res) => {
+  const { eventId } = req.params;
+
+  Event.findOneAndUpdate({ _id: eventId }, { $pull: { foods: req.body.food } }, (err, updatedObj) => {
+    if (err) {
+      console.error('error deleting food item:', err);
+      res.sendStatus(500);
+    } else {
+      res.json(updatedObj);
+    }
+  });
+});
+
 // create an endpoint to retrieve all of the events the user is attending
 app.get('/event/users/:userId', (req, res) => {
   // access the userId from the request params
