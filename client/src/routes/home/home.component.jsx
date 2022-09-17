@@ -10,16 +10,22 @@ const Home = () => (
       <h1>Potluck Planner</h1>
       <h4>Leave nothing to luck</h4>
     </div>
-    <div className="container px-5 mt-4">
-      <div className="row gx-5">
-        <div className="col-md-6 text-center">
-          <Map />
+    <div className="parent container d-flex">
+      <div className="container px-5 mt-4">
+        <div className="row gx-5">
+          <div className="col-md-6 text-center">
+            <Map />
+          </div>
         </div>
+      </div>
+      <div className="container px-5 mt-4">
         <div className="col-md-6 text-center">
-          <h1>Event Card Component</h1>
-          {/* <Link to="/eventProfile">
-          </Link> */}
-          <EventList />
+          <div className="row gx-5">
+            <h1>Event Card Component</h1>
+            {/* <Link to="/eventProfile">
+        </Link> */}
+            <EventList />
+          </div>
         </div>
       </div>
     </div>

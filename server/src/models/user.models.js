@@ -12,7 +12,7 @@ const userSchema = new Schema({
       ref: 'Event',
     },
   ],
-  clout: Number,
+  clout: { type: Number, default: 0 },
   awards: [String],
   foods: [{
     type: Schema.Types.ObjectId,
