@@ -8,7 +8,8 @@ const Dish = (props) => {
   const style = currentUser ? currentUser._id : null === food.userId ? { fontWeight: 'bold' } : { fontWeight: 'normal' };
   
   const clickHandler = () => {
-    axios.delete(`/event/${props.eventId}`, { food: food })
+    console.log('food item:', food);
+    axios.delete(`/event/${props.eventId}`, { data: { food: food } })
       .then(result => {
         console.log(`${food.name} deleted!`);
       })
