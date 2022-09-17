@@ -6,6 +6,7 @@ import { UserContext } from '../../contexts/user.context';
 const Dishes = (props) => {
     const [foods, setFoods] = useState(props.foods);
     const [value, setValue] = useState('');
+    const [loading, setLoad] = useState('');
     const { currentUser } = useContext(UserContext);
 
     const clickHandler = () => {
@@ -15,13 +16,16 @@ const Dishes = (props) => {
             userId: currentUser._id,
         }
         
+        setLoad('Processing...');
         axios.put(`/event/${props.eventId}`, { food: newFood })
             .then(result => {
                 setFoods(foods.concat(newFood));
                 setValue('');
+                setLoad('');
             })
             .catch(err => {
                 console.log(err);
+                setLoad('Error adding dish, please try again');
             });
     }
 
@@ -49,6 +53,9 @@ const Dishes = (props) => {
                     onClick={ clickHandler }
                     disabled={value === '' || !currentUser}
                     >+</button>
+            </div>
+            <div>
+                { loading }
             </div>
             <ul className='list-group float-left d-flex justify-content-between'>
                 {foods.map((food, index) => {
