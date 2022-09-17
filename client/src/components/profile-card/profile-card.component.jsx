@@ -33,7 +33,6 @@ const ProfileCard = () => {
   const cloutDivided = Math.floor(currentUser.clout / 10);
   let emojiClout = '';
   const emojiArr = ['🍉', '🌭', '🍗', '🍔', '🥗', '🍲', '🍤', '🫔', '🌽', '🥟', '😁', '😁', '😁', '😁', '😁'];
-  const randomNum = Math.floor(Math.random() * emojiArr.length);
 
   for (let i = 0; i < cloutDivided; i++) {
     emojiClout += emojiArr[Math.floor(Math.random() * emojiArr.length)];
