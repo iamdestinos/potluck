@@ -13,10 +13,12 @@ const Dishes = (props) => {
   const clickHandler = () => {
     const newFood = {
       name: value,
-      course: props.title === 'Main Dishes' ? 'main' : 'side',
+      course: props.title === 'Main Dishes' ? 'main' : props.title === 'Side Dishes' ? 'side' : props.title === 'Bread' ? 'bread' : props.title === "Salads" ? 'salad' : props.title === "Desserts" ? "dessert" : "other",
       userId: currentUser._id,
     };
+    if (props.attending.includes(currentUser._id) && currentUser._id !== null) {
 
+<<<<<<< HEAD
     setLoad('Processing...');
     axios.put(`/event/${props.eventId}`, { food: newFood })
       .then((result) => {
@@ -31,6 +33,24 @@ const Dishes = (props) => {
 
     // add some clout when newFood is added
     cloutEnhancer(currentUser._id, 3);
+=======
+        setLoad('Processing...');
+        axios.put(`/event/${props.eventId}`, { food: newFood })
+        .then((result) => {
+            setFoods(foods.concat(newFood));
+            setValue('');
+            setLoad('');
+        })
+        .catch((err) => {
+            console.log(err);
+            setLoad('Error adding dish, please try again');
+        });
+    } else if (currentUser._id !== null) {
+        setLoad('You must be attending this event to add a dish!');
+    } else {
+        setLoad("You must be logged in to add a dish!");
+    }
+>>>>>>> 30e3bde295db34ccf71e204223d009e5a6182e5b
   };
 
   const inputHandler = (e) => {
@@ -59,14 +79,13 @@ const Dishes = (props) => {
           disabled={value === '' || !currentUser}
         >
           +
-
         </button>
       </div>
       <div>
         { loading }
       </div>
       <ul className="list-group float-left d-flex justify-content-between">
-        {foods.map((food, index) => (<Dish food={food} key={food.name + index} />))}
+        {foods.map((food, index) => (<Dish food={food} key={food.name + index} eventId={props.eventId} />))}
       </ul>
     </div>
   );
