@@ -21,7 +21,7 @@ const Home = () => (
       <div className="container px-5 mt-4">
         <div className="col-md-6 text-center">
           <div className="row gx-5">
-            <h1>Potlucks Near You!</h1>
+            <h3>Potlucks Near You!</h3>
             {/* <Link to="/eventProfile">
         </Link> */}
             <EventList />
