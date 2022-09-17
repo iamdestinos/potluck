@@ -4,8 +4,6 @@ import FoodForm from '../food-form/food-form.component';
 const EventProfileCard = ({ selectedEvent }) => (
   <div className="card text-bg-light mb-3" style={{ maxWidth: '18rem' }}>
     <h1>{selectedEvent.eventName}</h1>
-    <div className="main-dish" />
-    <div className="side-dish" />
     <FoodForm foods={selectedEvent.foods} eventId={selectedEvent._id}/>
     <div className="attending">{`${selectedEvent.attending.length} people attending`}</div>
   </div>
