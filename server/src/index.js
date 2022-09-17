@@ -89,10 +89,23 @@ app.put('/event/:eventId', (req, res) => {
       console.error('error updating event:', err);
       res.sendStatus(500);
     } else {
-      res.json(updatedObj);
+      res.sendStatus(200);
     }
   });
 });
+
+app.put('/event/update/:eventId', (req, res) => {
+  const { eventId } = req.params;
+
+  Event.findOneAndUpdate({ _id: eventId, foods: req.body.food }, { $set: { "foods.$": req.body.newFood }}, (err, updatedObj) => {
+    if (err) {
+      console.error('error updating food item:', err);
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+})
 
 app.delete('/event/:eventId', (req, res) => {
   const { eventId } = req.params;
