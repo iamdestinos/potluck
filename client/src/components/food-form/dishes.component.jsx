@@ -4,18 +4,6 @@ import Dish from './dish.component.jsx';
 import { UserContext } from '../../contexts/user.context';
 
 const Dishes = (props) => {
-<<<<<<< HEAD
-  const [foods, setFoods] = useState(props.foods);
-  const [value, setValue] = useState('');
-  const { currentUser } = useContext(UserContext);
-
-  const clickHandler = () => {
-    const newFood = {
-      name: value,
-      course: props.title === 'Main Dishes' ? 'main' : 'side',
-      userId: currentUser._id,
-    };
-=======
     const [foods, setFoods] = useState(props.foods);
     const [value, setValue] = useState('');
     const [loading, setLoad] = useState('');
@@ -40,7 +28,6 @@ const Dishes = (props) => {
                 setLoad('Error adding dish, please try again');
             });
     }
->>>>>>> cf2dbe50a3e69a3107cabe2eab45ef281d6771a9
 
     axios.put(`/event/${props.eventId}`, { food: newFood })
       .then((result) => {
@@ -52,11 +39,6 @@ const Dishes = (props) => {
       });
   };
 
-<<<<<<< HEAD
-  const inputHandler = (e) => {
-    setValue(e.target.value);
-  };
-=======
     return (
         <div className={props.className}>
             {props.title}
@@ -89,7 +71,6 @@ const Dishes = (props) => {
         </div>
     )
 }
->>>>>>> cf2dbe50a3e69a3107cabe2eab45ef281d6771a9
 
   return (
     <div className={props.className}>
