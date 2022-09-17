@@ -55,7 +55,7 @@ const Dish = (props) => {
       {isEdit ? 
         <div className="row float-center">
           <input 
-            className="col-sm-9"
+            className="col-sm-8"
             value={editVal}
             onChange={inputHandler}
             onKeyPress={(e) => {
@@ -68,6 +68,11 @@ const Dish = (props) => {
             className="col-sm-1"
             onClick={clickEditHandler}
             disabled={loading}
+            >O</button>
+          <button
+            className="col-sm-1"
+            disabled={loading}
+            onClick={() => setEdit(false)}
             >X</button>
         </div>
         : food.name
