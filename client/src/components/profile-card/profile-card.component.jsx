@@ -27,7 +27,7 @@ const ProfileCard = () => {
       });
   }, []);
 
-  console.log('HERES THE DANG userEVENTS!:\n', userEvents);
+  // console.log('HERES THE DANG userEVENTS!:\n', userEvents);
 
   // create a number
   const cloutDivided = Math.floor(currentUser.clout / 10);
