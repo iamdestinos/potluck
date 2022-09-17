@@ -55,14 +55,13 @@ const Dishes = (props) => {
           disabled={value === '' || !currentUser}
         >
           +
-
         </button>
       </div>
       <div>
         { loading }
       </div>
       <ul className="list-group float-left d-flex justify-content-between">
-        {foods.map((food, index) => (<Dish food={food} key={food.name + index} />))}
+        {foods.map((food, index) => (<Dish food={food} key={food.name + index} eventId={props.eventId} />))}
       </ul>
     </div>
   );
