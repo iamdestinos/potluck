@@ -53,27 +53,32 @@ const Dish = (props) => {
 
   return <li style={ style }>
       {isEdit ? 
-        <div className="row float-center">
-          <input 
-            className="col-sm-8"
-            value={editVal}
-            onChange={inputHandler}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                clickEditHandler();
-              }
-            }}
-            ></input>
-          <button 
-            className="col-sm-1"
-            onClick={clickEditHandler}
-            disabled={loading}
-            >O</button>
-          <button
-            className="col-sm-1"
-            disabled={loading}
-            onClick={() => setEdit(false)}
-            >X</button>
+        <div>
+          <div className="row float-center">
+            <input 
+              className="col-sm-8"
+              value={editVal}
+              onChange={inputHandler}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  clickEditHandler();
+                }
+              }}
+              ></input>
+            <button 
+              className="col-sm-1"
+              onClick={clickEditHandler}
+              disabled={loading}
+              >O</button>
+            <button
+              className="col-sm-1"
+              disabled={loading}
+              onClick={() => setEdit(false)}
+              >X</button>
+          </div>
+          <div>
+            {loading ? 'processing...' : ''}
+          </div>
         </div>
         : food.name
       }
