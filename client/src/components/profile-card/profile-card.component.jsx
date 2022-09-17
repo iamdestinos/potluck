@@ -9,34 +9,35 @@ import EventProfile from '../events/eventprofile-card';
 
 const ProfileCard = () => {
   const { currentUser } = useContext(UserContext);
-  const { events } = useContext(EventsContext);
-  const userEvents = events.filter((event) => event.attending.includes(currentUser._id));
-  console.log('events:\n', events);
-  console.log('userEvents:\n', userEvents);
+  // const { events } = useContext(EventsContext);
+  // const userEvents = events.filter((event) => event.attending.includes(currentUser._id));
+  // console.log('events:\n', events);
+  // console.log('userEvents:\n', userEvents);
+
+  const [userEvents, setUserEvents] = useState([]);
+  // send a get request to the event database that returns the events the current user is attending
+  useEffect(() => {
+    axios.get(`/event/users/${currentUser._id}`)
+      .then(({ data }) => {
+        // console.log('Heres the events I found:\n', data);
+        setUserEvents(data);
+      })
+      .catch((err) => {
+        console.log('This is the error from the get request in userEvents:\n', err);
+      });
+  }, []);
+
+  console.log('HERES THE DANG userEVENTS!:\n', userEvents);
 
   // create a number
   const cloutDivided = Math.floor(currentUser.clout / 10);
   let emojiClout = '';
-  const emojiString = '🍉🌭🍗🍔🥗🍲🍤🫔🌽🥟😁😁😁😁😁';
+  const emojiArr = ['🍉', '🌭', '🍗', '🍔', '🥗', '🍲', '🍤', '🫔', '🌽', '🥟', '😁', '😁', '😁', '😁', '😁'];
+  const randomNum = Math.floor(Math.random() * emojiArr.length);
 
   for (let i = 0; i < cloutDivided; i++) {
-    emojiClout += emojiString[Math.floor(Math.random() * emojiString.length)];
+    emojiClout += emojiArr[Math.floor(Math.random() * emojiArr.length)];
   }
-
-  // const [userEvents, setUserEvents] = useState([]);
-  // send a get request to the event database that returns the events the current user is attending
-  // useEffect(() => {
-  //   axios.get(`/event/users/${currentUser._id}`)
-  //     .then(({ data }) => {
-  //       // console.log('Heres the events I found:\n', data);
-  //       setUserEvents(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log('This is the error from the get request in userEvents:\n', err);
-  //     });
-  // }, []);
-
-  // console.log('HERES THE DANG userEVENTS!:\n', userEvents);
 
   return (
     <>
