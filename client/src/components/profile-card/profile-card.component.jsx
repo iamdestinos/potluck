@@ -27,9 +27,27 @@ const ProfileCard = () => {
       });
   }, []);
 
-  // console.log('HERES THE DANG userEVENTS!:\n', userEvents);
+  // destructure clout to use it easily
+  const { clout } = currentUser;
+  // create a descriptor based on clout
+  let descriptor = '';
 
-  // create a number
+  // change value of desctiptor based on clout
+  if (clout < 50) {
+    descriptor = 'Welcome, you Potluck Padawan';
+  } else if (clout < 100) {
+    descriptor = 'Now you\'re a Dinner Debutante';
+  } else if (clout < 150) {
+    descriptor = 'Here comes the BBQ Baller!';
+  } else if (clout < 200) {
+    descriptor = 'It\'s the Cookout Collaborator!';
+  } else if (clout < 250) {
+    descriptor = 'Make way for the Field Day Frivolator!';
+  } else {
+    descriptor = 'It\'s the Merriment-making Master!';
+  }
+
+  // create a number that is the clout divided by 10, rounded down
   const cloutDivided = Math.floor(currentUser.clout / 10);
   let emojiClout = '';
   const emojiArr = ['🍉', '🌭', '🍗', '🍔', '🥗', '🍲', '🍤', '🫔', '🌽', '🥟', '😁', '😁', '😁', '😁', '😁'];
@@ -39,35 +57,28 @@ const ProfileCard = () => {
   }
 
   return (
-    <>
-      <div className="card text-bg-light mb-3" style={{ maxWidth: '18rem' }}>
-        <div className="text-center">
+    <div className="card" style={{ maxWidth: '800px' }}>
+      <div className="row g-0">
+        <div className="col-sm-5">
           <img className="card-img-top rounded-circle" style={{ width: '200px' }} src={currentUser.picture} alt={currentUser.name} />
-        </div>
-        <div className="card-body text-center">
           <h2>{currentUser.name}</h2>
           <p>{currentUser.email}</p>
-          <p>
-            {`clout: ${emojiClout}`}
-          </p>
+          <h5>{descriptor}</h5>
+          <p>{emojiClout}</p>
         </div>
-        <ul className="list-group list-group-flush">
-          {userEvents.map((event, i) => (
-            <Link key={event._id} to={`/eventprofile/${event._id}`}>
-              <li className="list-group-item">
-                <Events key={event._id} event={event} />
-              </li>
-            </Link>
-          ))}
-        </ul>
+        <div className="col-sm-7">
+          <ul className="list-group list-group-flush">
+            {userEvents.map((event, i) => (
+              <Link key={event._id} to={`/eventprofile/${event._id}`} style={{ textDecoration: 'none' }}>
+                <li className="list-group-item">
+                  <Events key={event._id} event={event} view="profile" />
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </div>
       </div>
-      {/* {userEvents.map((event) => <EventProfile selectedEvent={event} />)} */}
-      {/* <li className="list-group-item">Event Entry</li>
-        <li className="list-group-item">Event Entry</li>
-        <li className="list-group-item">Event Entry</li>
-        <li className="list-group-item">Event Entry</li>
-      <li className="list-group-item">Event Entry</li> */}
-    </>
+    </div>
   );
 };
 
