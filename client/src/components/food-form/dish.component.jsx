@@ -5,22 +5,23 @@ import axios from 'axios';
 const Dish = (props) => {
   const [food, setFood] = useState(props.food);
   const { currentUser } = useContext(UserContext);
-  const style = currentUser ? currentUser._id : null === food.userId ? { fontWeight: 'bold' } : { fontWeight: 'normal' };
+  const bool = currentUser ? currentUser._id : null;
+  const style = bool === food.userId ? { fontWeight: 'bold' } : { fontWeight: 'normal' };
   
   const clickHandler = () => {
-    console.log('food item:', food);
-    axios.delete(`/event/${props.eventId}`, { data: { food: food } })
-      .then(result => {
-        console.log(`${food.name} deleted!`);
-      })
-      .catch(err => {
-        console.log(`failed to delete ${food.name}`);
-      });
+    if (bool === food.userId) {
+      axios.delete(`/event/${props.eventId}`, { data: { food: food } })
+        .then(result => {
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
   };
 
   return <li style={ style }>
       {food.name}
-      <button className='float-right' onClick={clickHandler}>Del</button>
+      { bool === food.userId ? <button className='float-right' onClick={clickHandler}>Del</button> : '' }
     </li>;
 }
 
