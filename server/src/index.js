@@ -94,6 +94,23 @@ app.put('/event/:eventId', (req, res) => {
   });
 });
 
+// create an endpoint to increment the user's clout
+app.put('/user/clout/:id', (req, res) => {
+  // access the user id from the request params
+  const { id } = req.params;
+  // access the numVal from the req.body
+  const { numVal } = req.body;
+  // find the user and update their clout by the numVal
+  User.findByIdAndUpdate(id, { $inc: { clout: numVal } })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log('!!THIS is the error from the clout PUT request handling:\n', err);
+      res.sendStatus(500);
+    });
+});
+
 // create an endpoint to retrieve all of the events the user is attending
 app.get('/event/users/:userId', (req, res) => {
   // access the userId from the request params
@@ -115,13 +132,13 @@ app.get('/event/:eventId', (req, res) => {
   const { eventId } = req.params;
 
   Event.findOne({ _id: eventId })
-    .then(event => {
+    .then((event) => {
       res.status(200).json(event);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error('error finding request', eventId, err);
       res.sendStatus(500);
-    })
+    });
 });
 
 // app.get('/user', (req, res) => {
