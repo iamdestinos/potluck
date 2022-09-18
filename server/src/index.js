@@ -96,7 +96,7 @@ app.put('/event/:eventId', (req, res) => {
 app.put('/event/update/:eventId', (req, res) => {
   const { eventId } = req.params;
 
-  Event.findOneAndUpdate({ _id: eventId, foods: req.body.food }, { $set: { "foods.$": req.body.newFood }}, (err, updatedObj) => {
+  Event.findOneAndUpdate({ _id: eventId, foods: req.body.food }, { $set: { 'foods.$': req.body.newFood } }, (err, updatedObj) => {
     if (err) {
       console.error('error updating food item:', err);
       res.sendStatus(500);
@@ -104,7 +104,7 @@ app.put('/event/update/:eventId', (req, res) => {
       res.sendStatus(200);
     }
   });
-})
+});
 
 app.delete('/event/:eventId', (req, res) => {
   const { eventId } = req.params;
@@ -119,31 +119,47 @@ app.delete('/event/:eventId', (req, res) => {
   });
 });
 
+// create an endpoint to increment the user's clout
+app.put('/user/clout/:id', (req, res) => {
+  // access the user id from the request params
+  const { id } = req.params;
+  // access the numVal from the req.body
+  const { numVal } = req.body;
+  // find the user and update their clout by the numVal
+  User.findByIdAndUpdate(id, { $inc: { clout: numVal } })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log('!!THIS is the error from the clout PUT request handling:\n', err);
+      res.sendStatus(500);
+    });
+});
 app.put('/event/going/:eventId', (req, res) => {
-  const {params: {eventId}, body: {event}} = req;
-  Event.updateOne({_id: eventId}, event)
-    .then(({modifiedCount}) => {
-      if ({modifiedCount}) {
+  const { params: { eventId }, body: { event } } = req;
+  Event.updateOne({ _id: eventId }, event)
+    .then(({ modifiedCount }) => {
+      if ({ modifiedCount }) {
         res.sendStatus(200);
       } else {
         res.sendStatus(404);
       }
     })
-    .catch(() => res.sendStatus(500))
-})
+    .catch(() => res.sendStatus(500));
+});
 
 app.put('/user/:id', (req, res) => {
-  const {params: {id}, body: {user}} = req;
-  User.updateOne({_id: user.id}, {user})
-    .then(({modifiedCount}) =>  {
-      if ({modifiedCount}) {
+  const { params: { id }, body: { user } } = req;
+  User.updateOne({ _id: user.id }, { user })
+    .then(({ modifiedCount }) => {
+      if ({ modifiedCount }) {
         res.sendStatus(200);
       } else {
         res.sendStatus(404);
       }
     })
-    .catch(() => res.sendStatus(500))
-})
+    .catch(() => res.sendStatus(500));
+});
 
 // create an endpoint to retrieve all of the events the user is attending
 app.get('/event/users/:userId', (req, res) => {
@@ -165,13 +181,13 @@ app.get('/event/users/:userId', (req, res) => {
 app.get('/event/:eventId', (req, res) => {
   const { eventId } = req.params;
   Event.findOne({ _id: eventId })
-    .then(event => {
+    .then((event) => {
       res.status(200).json(event);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error('error finding request', eventId, err);
       res.sendStatus(500);
-    })
+    });
 });
 
 app.listen(PORT, () => console.log(clc.green.bgWhite(`Potluck is running on port ${PORT}...`)));

@@ -8,7 +8,7 @@ const Home = () => (
   <>
     <div className="mt-4 text-center">
       <h1>Potluck Planner</h1>
-      <h4>Leave nothing to luck</h4>
+      <h4>Lookout for the Cookout</h4>
     </div>
     <div className="parent container d-flex">
       <div className="container px-5 mt-4">
@@ -21,7 +21,7 @@ const Home = () => (
       <div className="container px-5 mt-4">
         <div className="col-md-6 text-center">
           <div className="row gx-5">
-            <h1>Event Card Component</h1>
+            <h3>Potlucks Near You!</h3>
             {/* <Link to="/eventProfile">
         </Link> */}
             <EventList />

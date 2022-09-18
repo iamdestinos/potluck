@@ -9,7 +9,6 @@ export const EventsContext = createContext({
 export const EventProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
   const value = { events, setEvents };
-
   useEffect(() => {
     axios.get('/event')
       .then(({ data }) => {
@@ -18,6 +17,6 @@ export const EventProvider = ({ children }) => {
       .catch((err) => {
         console.log('The error from the axios GET request:\n', err);
       });
-  }, []);
+  }, [events]);
   return <EventsContext.Provider value={value}>{children}</EventsContext.Provider>;
 };
