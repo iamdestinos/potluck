@@ -19,7 +19,7 @@ const EventProfile = () => {
         setGo({ going: !going.going });
       }
     }
-  }, []);
+  }, [events]);
 
   // create a get request and setEvent context
   const updateEvents = async () => {
@@ -40,16 +40,23 @@ const EventProfile = () => {
           setGo({ going: !going.going });
           await cloutEnhancer(currentUser._id, 3);
           await updateEvents();
+          // console.log('wait a sec. This is after updateEvents, but before testArr.push');
           testArr.push('a');
         } catch (err) {
           console.error('This is the error #421:\n', err);
         }
       } else {
         try {
+          // console.log('We about to pull and we gon update events in....\nTHREE...');
           await axios.put(`/event/going/${foundEvent._id}`, { event: { $pull: { attending: currentUser._id } } });
+          // console.log('TWO.....');
           setGo({ going: !going.going });
+          testArr.push('b');
+          // console.log('ONE......');
           await cloutEnhancer(currentUser._id, -3);
+          // console.log('ZERO!!!');
           await updateEvents();
+          // console.log('Did it work?');
         } catch (err) {
           console.error('This is the error #BTH:\n', err);
         }
