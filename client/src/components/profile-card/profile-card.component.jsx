@@ -9,17 +9,11 @@ import EventProfile from '../events/eventprofile-card';
 
 const ProfileCard = () => {
   const { currentUser } = useContext(UserContext);
-  // const { events } = useContext(EventsContext);
-  // const userEvents = events.filter((event) => event.attending.includes(currentUser._id));
-  // console.log('events:\n', events);
-  // console.log('userEvents:\n', userEvents);
-
   const [userEvents, setUserEvents] = useState([]);
   // send a get request to the event database that returns the events the current user is attending
   useEffect(() => {
     axios.get(`/event/users/${currentUser._id}`)
       .then(({ data }) => {
-        // console.log('Heres the events I found:\n', data);
         setUserEvents(data);
       })
       .catch((err) => {
