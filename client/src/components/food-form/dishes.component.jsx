@@ -10,7 +10,7 @@ const Dishes = (props) => {
   const [value, setValue] = useState('');
   const [loading, setLoad] = useState('');
   const { currentUser } = useContext(UserContext);
-  const { setEvents } = useContext(EventsContext);
+  const { setEvents, testArr } = useContext(EventsContext);
 
   const updateEvents = async () => {
     try {
@@ -27,9 +27,9 @@ const Dishes = (props) => {
       course: props.title === 'Main Dishes' ? 'main' : props.title === 'Side Dishes' ? 'side' : props.title === 'Bread' ? 'bread' : props.title === 'Salads' ? 'salad' : props.title === 'Desserts' ? 'dessert' : 'other',
       userId: currentUser._id,
     };
-    console.log('This is props:\n', props);
-    console.log('This is props.attending:\n', props.attending);
-    console.log('This is currentUser:\n', currentUser);
+    // console.log('This is props:\n', props);
+    // console.log('This is props.attending:\n', props.attending);
+    // console.log('This is currentUser:\n', currentUser);
     if (props.attending.includes(currentUser._id) && currentUser._id !== null) {
       setLoad('Processing...');
       try {
@@ -37,6 +37,7 @@ const Dishes = (props) => {
         setFoods(foods.concat(newFood));
         await cloutEnhancer(currentUser._id, 3);
         await updateEvents();
+        testArr.push('c');
         setValue('');
         setLoad('');
       } catch (err) {
