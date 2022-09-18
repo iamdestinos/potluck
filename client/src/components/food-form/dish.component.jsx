@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { UserContext } from '../../contexts/user.context';
 import axios from 'axios';
+import { UserContext } from '../../contexts/user.context';
+import cloutEnhancer from '../../controllers/clout-enhancements';
 
 const Dish = (props) => {
   const [food, setFood] = useState(props.food);
@@ -14,11 +15,12 @@ const Dish = (props) => {
   const clickDelHandler = () => {
     if (bool === food.userId) {
       setLoad(true);
-      axios.delete(`/event/${props.eventId}`, { data: { food: food } })
-        .then(result => {
-          setStyle({textDecoration: "line-through", fontWeight: 'bold'});
+      axios.delete(`/event/${props.eventId}`, { data: { food } })
+        .then((result) => {
+          setStyle({ textDecoration: 'line-through', fontWeight: 'bold' });
+          cloutEnhancer(currentUser._id, -3);
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
           setLoad(false);
         });
@@ -34,13 +36,13 @@ const Dish = (props) => {
     };
 
     setLoad(true);
-    axios.put(`/event/update/${props.eventId}`, { food: food, newFood: newFood})
-      .then(result => {
+    axios.put(`/event/update/${props.eventId}`, { food, newFood })
+      .then((result) => {
         setFood(newFood);
         setLoad(false);
         setEdit(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         setLoad(false);
         setEdit(false);
@@ -49,47 +51,55 @@ const Dish = (props) => {
 
   const inputHandler = (e) => {
     setVal(e.target.value);
-  }
+  };
 
-  return <li style={ style }>
-      {isEdit ? 
-        <div>
-          <div className="row float-center">
-            <input 
-              className="col-sm-8"
-              value={editVal}
-              onChange={inputHandler}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  clickEditHandler();
-                }
-              }}
-              ></input>
-            <button 
-              className="col-sm-1"
-              onClick={clickEditHandler}
-              disabled={loading}
-              >O</button>
-            <button
-              className="col-sm-1"
-              disabled={loading}
-              onClick={() => setEdit(false)}
-              >X</button>
-          </div>
+  return (
+    <li style={style}>
+      {isEdit
+        ? (
           <div>
-            {loading ? 'processing...' : ''}
+            <div className="row float-center">
+              <input
+                className="col-sm-8"
+                value={editVal}
+                onChange={inputHandler}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    clickEditHandler();
+                  }
+                }}
+              />
+              <button
+                className="col-sm-1"
+                onClick={clickEditHandler}
+                disabled={loading}
+              >
+                O
+              </button>
+              <button
+                className="col-sm-1"
+                disabled={loading}
+                onClick={() => setEdit(false)}
+              >
+                X
+              </button>
+            </div>
+            <div>
+              {loading ? 'processing...' : ''}
+            </div>
           </div>
-        </div>
-        : food.name
-      }
-      { (bool === food.userId) && !isEdit ?
-        <span className='float-right justify-content-between'>
-          <button onClick={() => setEdit(true)} disabled={loading}>Edit</button>
-          <button onClick={clickDelHandler} disabled={loading}>Del</button>
-        </span>
-        : ''
-      }
-    </li>;
-}
+        )
+        : food.name}
+      { (bool === food.userId) && !isEdit
+        ? (
+          <span className="float-right justify-content-between">
+            <button onClick={() => setEdit(true)} disabled={loading}>Edit</button>
+            <button onClick={clickDelHandler} disabled={loading}>Del</button>
+          </span>
+        )
+        : ''}
+    </li>
+  );
+};
 
 export default Dish;
