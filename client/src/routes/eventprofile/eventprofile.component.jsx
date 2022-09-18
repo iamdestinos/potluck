@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { EventsContext } from '../../contexts/events.context';
+import { EventsContext, testArrChanger } from '../../contexts/events.context';
 import { UserContext } from '../../contexts/user.context';
 import EventProfileCard from '../../components/events/eventprofile-card';
+import cloutEnhancer from '../../controllers/clout-enhancements';
 
 const EventProfile = () => {
   const { id } = useParams();
@@ -26,12 +27,16 @@ const EventProfile = () => {
         axios.put(`/event/going/${foundEvent._id}`, { event: { $push: { attending: currentUser._id } } })
           .then(() => {
             setGo({ going: !going.going });
+            cloutEnhancer(currentUser._id, 3);
+            testArrChanger();
           })
           .catch((err) => console.log(err));
       } else {
         axios.put(`/event/going/${foundEvent._id}`, { event: { $pull: { attending: currentUser._id } } })
           .then(() => {
             setGo({ going: !going.going });
+            cloutEnhancer(currentUser._id, -3);
+            testArrChanger();
           })
           .catch((err) => console.log(err));
       }
