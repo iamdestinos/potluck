@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Dish from './dish.component.jsx';
 import { UserContext } from '../../contexts/user.context';
+import { EventsContext } from '../../contexts/events.context.jsx';
 import cloutEnhancer from '../../controllers/clout-enhancements.js';
 
 const Dishes = (props) => {
@@ -9,39 +10,40 @@ const Dishes = (props) => {
   const [value, setValue] = useState('');
   const [loading, setLoad] = useState('');
   const { currentUser } = useContext(UserContext);
+  const { setEvents, testArr } = useContext(EventsContext);
 
-  const clickHandler = () => {
+  const updateEvents = async () => {
+    try {
+      const { data } = await axios.get('/event');
+      await setEvents(data);
+    } catch (err) {
+      console.error('This is the error in the try/catch:\n', err);
+    }
+  };
+
+  const clickHandler = async () => {
     const newFood = {
       name: value,
       course: props.title === 'Main Dishes' ? 'main' : props.title === 'Side Dishes' ? 'side' : props.title === 'Bread' ? 'bread' : props.title === 'Salads' ? 'salad' : props.title === 'Desserts' ? 'dessert' : 'other',
       userId: currentUser._id,
     };
+    // console.log('This is props:\n', props);
+    // console.log('This is props.attending:\n', props.attending);
+    // console.log('This is currentUser:\n', currentUser);
     if (props.attending.includes(currentUser._id) && currentUser._id !== null) {
       setLoad('Processing...');
-      axios.put(`/event/${props.eventId}`, { food: newFood })
-        .then((result) => {
-          setFoods(foods.concat(newFood));
-          setValue('');
-          setLoad('');
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoad('Error adding dish, please try again');
-        });
-
-      // add some clout when newFood is added
-      cloutEnhancer(currentUser._id, 3);
-      setLoad('Processing...');
-      axios.put(`/event/${props.eventId}`, { food: newFood })
-        .then((result) => {
-          setFoods(foods.concat(newFood));
-          setValue('');
-          setLoad('');
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoad('Error adding dish, please try again');
-        });
+      try {
+        await axios.put(`/event/${props.eventId}`, { food: newFood });
+        setFoods(foods.concat(newFood));
+        await cloutEnhancer(currentUser._id, 3);
+        await updateEvents();
+        testArr.push('c');
+        setValue('');
+        setLoad('');
+      } catch (err) {
+        console.error('The Error in the catch:\n', err);
+        setLoad('Error adding dish, please try again');
+      }
     } else if (currentUser._id !== null) {
       setLoad('You must be attending this event to add a dish!');
     } else {

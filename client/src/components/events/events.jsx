@@ -15,7 +15,7 @@ const Events = ({ event, view }) => {
         <>
           <p>You are bringing:</p>
           <ul>
-            {userFoods.map((food) => <li key={`${food}${food.userId}`}><i>{food.name}</i></li>)}
+            {userFoods.map((food) => <li key={`${food}${food.userId}${Math.random()}`}><i>{food.name}</i></li>)}
           </ul>
         </>
       );
