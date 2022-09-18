@@ -1,33 +1,44 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../contexts/user.context';
+import { EventsContext } from '../../contexts/events.context';
 import cloutEnhancer from '../../controllers/clout-enhancements';
 
 const Dish = (props) => {
   const [food, setFood] = useState(props.food);
   const { currentUser } = useContext(UserContext);
+  const { setEvents } = useContext(EventsContext);
   const bool = currentUser ? currentUser._id : null;
   const [style, setStyle] = useState(bool === food.userId ? { fontWeight: 'bold' } : { fontWeight: 'normal' });
   const [loading, setLoad] = useState(false);
   const [isEdit, setEdit] = useState(false);
   const [editVal, setVal] = useState(food.name);
 
-  const clickDelHandler = () => {
-    if (bool === food.userId) {
-      setLoad(true);
-      axios.delete(`/event/${props.eventId}`, { data: { food } })
-        .then((result) => {
-          setStyle({ textDecoration: 'line-through', fontWeight: 'bold' });
-          cloutEnhancer(currentUser._id, -3);
-        })
-        .catch((err) => {
-          console.error(err);
-          setLoad(false);
-        });
+  const updateEvents = async () => {
+    try {
+      const { data } = await axios.get('/event');
+      await setEvents(data);
+    } catch (err) {
+      console.error('This is the error in the try/catch:\n', err);
     }
   };
 
-  const clickEditHandler = () => {
+  const clickDelHandler = async () => {
+    if (bool === food.userId) {
+      setLoad(true);
+      try {
+        await axios.delete(`/event/${props.eventId}`, { data: { food } });
+        setStyle({ textDecoration: 'line-through', fontWeight: 'bold' });
+        await cloutEnhancer(currentUser._id, -3);
+        await updateEvents();
+      } catch (err) {
+        console.error('This is the error from inside clickDelHandler:\n', err);
+        setLoad(false);
+      }
+    }
+  };
+
+  const clickEditHandler = async () => {
     const newName = editVal;
     const newFood = {
       name: newName,
@@ -36,17 +47,18 @@ const Dish = (props) => {
     };
 
     setLoad(true);
-    axios.put(`/event/update/${props.eventId}`, { food, newFood })
-      .then((result) => {
-        setFood(newFood);
-        setLoad(false);
-        setEdit(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoad(false);
-        setEdit(false);
-      });
+    try {
+      await axios.put(`/event/update/${props.eventId}`, { food, newFood });
+      setFood(newFood);
+      setLoad(false);
+      setEdit(false);
+      await cloutEnhancer(currentUser._id, 3);
+      await updateEvents();
+    } catch (err) {
+      console.error('This is the error inside clickEditHandler:\n', err);
+      setLoad(false);
+      setEdit(false);
+    }
   };
 
   const inputHandler = (e) => {
