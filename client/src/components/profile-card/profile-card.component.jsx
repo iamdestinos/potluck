@@ -62,10 +62,10 @@ const ProfileCard = () => {
         </div>
         <div className="col-sm-7">
           <ul className="list-group list-group-flush">
-            {userEvents.map((event) => (
+            {userEvents.map((event, i) => (
               <Link key={event._id} to={`/eventprofile/${event._id}`} style={{ textDecoration: 'none' }}>
                 <li className="list-group-item">
-                  <Events key={event._id} event={event} view="profile" />
+                  <Events key={`${event._id}${i}`} event={event} view="profile" />
                 </li>
               </Link>
             ))}
