@@ -8,8 +8,8 @@ const EventList = () => {
 
   return (
     <ul className="list-group list-group-flush" style={{ minWidth: '400px' }}>
-      {events.map((event) => (
-        <Link key={event._id} to={`/eventprofile/${event._id}`} style={{ textDecoration: 'none' }}>
+      {events.map((event, i) => (
+        <Link key={`${event._id}${i}`} to={`/eventprofile/${event._id}`} style={{ textDecoration: 'none' }}>
           <li className="list-group-item">
             <Events event={event} />
           </li>
