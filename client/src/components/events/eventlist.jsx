@@ -6,9 +6,11 @@ import Events from './events';
 const EventList = () => {
   const { events } = useContext(EventsContext);
 
+  console.log("event list component",events);
+
   return (
     <ul className="list-group list-group-flush" style={{ minWidth: '400px' }}>
-      {events.map((event, i) => (
+      {events && events.map((event, i) => (
         <Link key={`${event._id}${i}`} to={`/eventprofile/${event._id}`} style={{ textDecoration: 'none' }}>
           <li className="list-group-item">
             <Events event={event} />
