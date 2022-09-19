@@ -36,7 +36,6 @@ const saveEvent = async (event) => {
     const eventArray = await Event.find({
       eventName: event.eventName,
       eventDate: event.eventDate,
-      host: event.host,
     });
     if (!eventArray.length) {
       return await Event.create(event);

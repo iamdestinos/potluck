@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
-import MapGl from 'react-map-gl';
+import MapGl, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+import { EventsContext } from '../../contexts/events.context';
+
 const Map = () => {
+  const { events } = useContext(EventsContext);
   const initialViewport = {
     latitude: 37.0902,
     longitude: -95.7129,
@@ -12,25 +15,15 @@ const Map = () => {
   const [viewport, setViewport] = useState(initialViewport);
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-        if (result.state === 'granted') {
-          navigator.geolocation.getCurrentPosition((position) => {
-            setViewport({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              zoom: 10,
-            });
-            console.log('Latitude is :', position.coords.latitude);
-            console.log('Longitude is :', position.coords.longitude);
-          });
-        } else if (result.state === 'prompt') {
-          console.log('User has not granted permission yet.');
-        } else if (result.state === 'denied') {
-          console.log('User has denied permission.');
-        }
-      });
-    }
+    // prompt user for location
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setViewport({
+          ...viewport, latitude, longitude, zoom: 10,
+        });
+      },
+    );
   }, []);
 
   return (
@@ -44,7 +37,20 @@ const Map = () => {
       }}
       mapStyle="mapbox://styles/mapbox/dark-v10"
       mapboxAccessToken={process.env.MAP_BOX_TOKEN}
-    />
+      onMove={(evt) => setViewport(evt.viewState)}
+    >
+
+      {/* {events.map((event) => {
+        // console.log("event in mapComponent",event?.eventLocation);
+      return ( <Marker key={event._id}
+          latitude={event?.eventLocation?.lat}
+          longitude={event?.eventLocation?.lon}
+        >
+          <div style={{ color: 'red' }}>📍</div>
+        </Marker>)
+      })} */}
+
+    </MapGl>
   );
 };
 
