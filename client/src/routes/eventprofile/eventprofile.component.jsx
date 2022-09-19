@@ -10,13 +10,13 @@ const EventProfile = () => {
   const { id } = useParams();
   const { events, setEvents, testArr } = useContext(EventsContext);
   const { currentUser } = useContext(UserContext);
-  const [going, setGo] = useState({ going: false });
+  const [going, setGo] = useState(false);
   const foundEvent = events.find((event) => event._id === id);
 
   useEffect(() => {
     if (currentUser) {
       if (foundEvent.attending.includes(currentUser._id)) {
-        setGo({ going: !going.going });
+        setGo(true);
       }
     }
   }, [events]);
@@ -25,20 +25,20 @@ const EventProfile = () => {
   const updateEvents = async () => {
     try {
       const { data } = await axios.get('/event');
-      await setEvents(data);
+      setEvents(data);
     } catch (err) {
       console.error('This is the error in the try/catch:\n', err);
     }
   };
 
   const letsGo = async () => {
-    console.log('going.going:\n', going.going);
+    console.log('going:\n', going);
     if (currentUser) {
-      if (going.going) {
+      if (!going) {
         try {
           await axios.put(`/event/going/${foundEvent._id}`, { event: { $push: { attending: currentUser._id } } });
-          setGo({ going: !going.going });
-          await cloutEnhancer(currentUser._id, 3);
+          setGo(!going);
+          cloutEnhancer(currentUser._id, 3);
           await updateEvents();
           // console.log('wait a sec. This is after updateEvents, but before testArr.push');
           testArr.push('a');
@@ -50,10 +50,10 @@ const EventProfile = () => {
           // console.log('We about to pull and we gon update events in....\nTHREE...');
           await axios.put(`/event/going/${foundEvent._id}`, { event: { $pull: { attending: currentUser._id } } });
           // console.log('TWO.....');
-          setGo({ going: !going.going });
+          setGo(!going);
           testArr.push('b');
           // console.log('ONE......');
-          await cloutEnhancer(currentUser._id, -3);
+          cloutEnhancer(currentUser._id, -3);
           // console.log('ZERO!!!');
           await updateEvents();
           // console.log('Did it work?');
@@ -68,7 +68,7 @@ const EventProfile = () => {
 
     <div className="w-75 mx-auto mt-5 pt-4">
       <div className="d-flex justify-content-end">
-        { going.going ? <button className="btn btn-success" onClick={letsGo} type="button">Attending</button>
+        { going ? <button className="btn btn-success" onClick={letsGo} type="button">Attending</button>
           : <button className="btn btn-danger" onClick={letsGo} type="button">Not Attending</button> }
       </div>
       <EventProfileCard selectEvent={foundEvent} />
