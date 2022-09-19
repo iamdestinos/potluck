@@ -5,6 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { UserContext } from '../../contexts/user.context';
 import useInput from './useInput.hook';
 import { EventsContext } from '../../contexts/events.context';
+import cloutEnhancer from '../../controllers/clout-enhancements';
 
 const CreateEvent = () => {
   const { loginWithRedirect } = useAuth0();
@@ -46,6 +47,7 @@ const CreateEvent = () => {
           console.log(data);
         }).then(() => {
           testArr.push('2');
+          cloutEnhancer(currentUser._id, 10);
         })
         .catch((err) => console.log('POST request was unsuccessful', err));
     } else {

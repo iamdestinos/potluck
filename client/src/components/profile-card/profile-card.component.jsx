@@ -27,8 +27,10 @@ const ProfileCard = () => {
   let descriptor = '';
 
   // change value of desctiptor based on clout
-  if (clout < 50) {
+  if (clout < 5) {
     descriptor = 'Welcome, you Potluck Padawan';
+  } else if (clout < 50) {
+    descriptor = 'Yes, a Get-together Grasshopper';
   } else if (clout < 100) {
     descriptor = 'Now you\'re a Dinner Debutante';
   } else if (clout < 150) {
@@ -37,8 +39,10 @@ const ProfileCard = () => {
     descriptor = 'It\'s the Cookout Collaborator!';
   } else if (clout < 250) {
     descriptor = 'Make way for the Field Day Frivolator!';
-  } else {
+  } else if (clout < 300) {
     descriptor = 'It\'s the Merriment-making Master!';
+  } else {
+    descriptor = 'The GOAT of the Gatherings';
   }
 
   // create a number that is the clout divided by 10, rounded down

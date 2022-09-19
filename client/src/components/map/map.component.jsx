@@ -40,15 +40,17 @@ const Map = () => {
       onMove={(evt) => setViewport(evt.viewState)}
     >
 
-      {/* {events.map((event) => {
+      {events.map((event) =>
         // console.log("event in mapComponent",event?.eventLocation);
-      return ( <Marker key={event._id}
-          latitude={event?.eventLocation?.lat}
-          longitude={event?.eventLocation?.lon}
-        >
-          <div style={{ color: 'red' }}>📍</div>
-        </Marker>)
-      })} */}
+        (
+          <Marker
+            key={event._id}
+            latitude={event?.location?.lat}
+            longitude={event?.location?.lon}
+          >
+            <div style={{ color: 'red' }}><h2>🍲</h2></div>
+          </Marker>
+        ))}
 
     </MapGl>
   );
