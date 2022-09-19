@@ -59,7 +59,7 @@ const CreateEvent = () => {
   return (
     <div className="create-form">
       <div>
-        <h2>New Event</h2>
+        <h2 className='text-center mt-4'>New Event</h2>
         <form>
           <div className="mb-3 mx-auto w-25">
             <label htmlFor="event-time" className="col-form-label">

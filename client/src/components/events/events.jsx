@@ -26,6 +26,10 @@ const Events = ({ event, view }) => {
   return (
     <>
       <h4>{event.eventName}</h4>
+      <span className="text-muted">
+        { new Date(event.eventDate).toLocaleString("default", { month: "short" })}
+        {new Date(event.eventDate).getDate()}
+      </span>
       {renderView()}
     </>
   );

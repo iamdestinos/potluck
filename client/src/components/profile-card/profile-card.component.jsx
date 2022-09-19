@@ -57,7 +57,7 @@ const ProfileCard = () => {
   return (
     <div className="card" style={{ maxWidth: '800px' }}>
       <div className="row g-0">
-        <div className="col-sm-5">
+        <div className="col-sm-5 px-5">
           <div className="text-center">
             <img className="card-img-top rounded-circle" style={{ width: '200px' }} src={currentUser.picture} alt={currentUser.name} />
           </div>
