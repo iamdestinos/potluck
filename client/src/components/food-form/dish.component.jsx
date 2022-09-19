@@ -66,7 +66,7 @@ const Dish = (props) => {
   };
 
   return (
-    <li style={style}>
+    <li className="d-flex justify-content-between" style={{ ...style, listStyle: 'none' }}>
       {isEdit
         ? (
           <div>

@@ -65,12 +65,14 @@ const EventProfile = () => {
   };
 
   return (
-    <>
-      <div className="d-flex justify-content-around pt-5">
-        <EventProfileCard selectEvent={foundEvent} />
+
+    <div className="w-75 mx-auto mt-5 pt-4">
+      <div className="d-flex justify-content-end">
+        { going ? <button className="btn btn-success" onClick={letsGo} type="button">Attending</button>
+          : <button className="btn btn-danger" onClick={letsGo} type="button">Not Attending</button> }
       </div>
-      <button onClick={letsGo} type="button">{going ? 'Currently Attending' : 'Not Attending'}</button>
-    </>
+      <EventProfileCard selectEvent={foundEvent} />
+    </div>
   );
 };
 
