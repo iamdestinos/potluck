@@ -16,6 +16,9 @@ export const testArrChanger = () => {
 export const EventProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
   const value = { events, setEvents, testArr };
+
+  console.log("events inside context", events);
+
   useEffect(() => {
     console.log('We getting those events from the EventContext again!');
     axios.get('/event')
