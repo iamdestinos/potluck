@@ -34,10 +34,10 @@ const EventProfile = () => {
   const letsGo = async () => {
     console.log('going:\n', going);
     if (currentUser) {
-      if (going) {
+      if (!going) {
         try {
           await axios.put(`/event/going/${foundEvent._id}`, { event: { $push: { attending: currentUser._id } } });
-          setGo({ going: !going });
+          setGo(!going);
           cloutEnhancer(currentUser._id, 3);
           await updateEvents();
           // console.log('wait a sec. This is after updateEvents, but before testArr.push');
@@ -50,7 +50,7 @@ const EventProfile = () => {
           // console.log('We about to pull and we gon update events in....\nTHREE...');
           await axios.put(`/event/going/${foundEvent._id}`, { event: { $pull: { attending: currentUser._id } } });
           // console.log('TWO.....');
-          setGo({ going: !going });
+          setGo(!going);
           testArr.push('b');
           // console.log('ONE......');
           cloutEnhancer(currentUser._id, -3);
@@ -69,7 +69,7 @@ const EventProfile = () => {
       <div className="d-flex justify-content-around pt-5">
         <EventProfileCard selectEvent={foundEvent} />
       </div>
-      <button onClick={letsGo} type="button">{going ? 'Not Attending' : 'Currently Attending'}</button>
+      <button onClick={letsGo} type="button">{going ? 'Currently Attending' : 'Not Attending'}</button>
     </>
   );
 };
