@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import MapGl, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -6,6 +7,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { EventsContext } from '../../contexts/events.context';
 
 const Map = () => {
+  const navigate = useNavigate();
   const { events } = useContext(EventsContext);
   const initialViewport = {
     latitude: 37.0902,
@@ -40,17 +42,16 @@ const Map = () => {
       onMove={(evt) => setViewport(evt.viewState)}
     >
 
-      {events.map((event) =>
-        // console.log("event in mapComponent",event?.eventLocation);
-        (
-          <Marker
-            key={event._id}
-            latitude={event?.location?.lat}
-            longitude={event?.location?.lon}
-          >
-            <div style={{ color: 'red' }}><h2>🍲</h2></div>
-          </Marker>
-        ))}
+      {events.map((event) => (
+        <Marker
+          key={event._id}
+          latitude={event?.location?.lat}
+          longitude={event?.location?.lon}
+        >
+          {/* <div style={{ color: 'red' }}><h2>🍲</h2></div> */}
+          <button type="button" onClick={() => navigate(`/eventprofile/${event._id}`)} style={{ all: 'unset', cursor: 'pointer' }}><h1>🍲</h1></button>
+        </Marker>
+      ))}
 
     </MapGl>
   );
