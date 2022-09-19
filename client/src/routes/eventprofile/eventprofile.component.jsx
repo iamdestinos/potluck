@@ -32,7 +32,7 @@ const EventProfile = () => {
           .catch((err) => console.log(err));
       } else {
 
-        axios.put(`/event/${foundEvent._id}`, { event: { $pull: { attending: currentUser._id } } })
+        axios.put(`/event/going/${foundEvent._id}`, { event: { $pull: { attending: currentUser._id } } })
           .then(() => {
             setGo(!going);
           })
