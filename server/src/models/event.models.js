@@ -7,9 +7,8 @@ const eventSchema = new Schema({
   eventName: String,
   location: {
     address: String,
-    city: String,
-    state: String,
-    zip: String,
+    lat: Number,
+    lon: Number,
   },
   foods: [],
   attending: [],
